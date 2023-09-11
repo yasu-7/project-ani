@@ -1,0 +1,23 @@
+#page {
+    margin: 0 auto;
+    width: 400px;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    float: right;
+    width: 200px;
+}
+
+sub1 {
+    float: left;
+    width: 100px;
+}
+
+sub2 {
+    float: left;
+    width: 100px;
+}
