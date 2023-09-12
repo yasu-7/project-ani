@@ -12,12 +12,12 @@ main {
     width: 200px;
 }
 
-sub1 {
+#sub1 {
     float: left;
     width: 100px;
 }
 
-sub2 {
+#sub2 {
     float: left;
     width: 100px;
 }
