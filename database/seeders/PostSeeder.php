@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class PostSeeder extends Seeder
 {
@@ -14,6 +16,36 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('posts')->insert([
+                'title' => '中学時代にはまったアニメ',
+                'body' => '中学生時代に主人公最強に憧れた',
+                'rate' => '42',
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+        ]);
+        
+        DB::table('posts')->insert([
+                'title' => 'ラブコメを集めたよん',
+                'body' => 'ハーレム最高！！',
+                'rate' => '67',
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+        ]);
+        
+        DB::table('posts')->insert([
+                'title' => 'ロボットアニメが好き！',
+                'body' => 'ロマンがあるアニメ',
+                'rate' => '103',
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+        ]);
+        
+        DB::table('posts')->insert([
+                'title' => '日常系アニメ',
+                'body' => 'ロマンがあるアニメ',
+                'rate' => '103',
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+        ]);
     }
 }
