@@ -41,4 +41,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    // Likeに対するリレーション
+    public function likes() 
+    {
+        return $this->belongsToMany(Like::class);
+    }
+    
+    // Viewに対するリレーション
+    public function views() 
+    {
+        return $this->belongsToMany(View::class);
+    }
+    
+    // commentに対するリレーション
+    public function comment() 
+    {
+        return $this->hasOne(Comment::class);
+    }
+    
+    // Postに対するリレーション
+    //「多対1」の関係なので単数系に
+    public function posts()
+    {
+        return $this->belongsTo(Post::class);
+    }
+    
+    // Rankに対するリレーション
+    //「1対多」の関係なので単数系に
+    public function ranks()
+    {
+        return $this->belongsTo(Rank::class);
+    }
 }

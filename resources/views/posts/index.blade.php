@@ -20,7 +20,11 @@
     </header>
     
     <main>
-        新規投稿や記事などかく
+        <h1>Blog Name</h1>
+        <div class='posts'>
+            <div class='post'>
+                <h2 class='title'>Title</h2>
+                <p class='body'>This is a sample body.</p>
     </main>
     
     <div id="sub1">
