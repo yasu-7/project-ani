@@ -22,6 +22,8 @@ class PostSeeder extends Seeder
                 'rate' => '42',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
+                'user_id' => '1',
+                'anime_id' => '6'
         ]);
         
         DB::table('posts')->insert([
@@ -30,6 +32,8 @@ class PostSeeder extends Seeder
                 'rate' => '67',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
+                'user_id' => '2',
+                'anime_id' => '7'
         ]);
         
         DB::table('posts')->insert([
@@ -38,6 +42,8 @@ class PostSeeder extends Seeder
                 'rate' => '103',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
+                'user_id' => '3',
+                'anime_id' => '9'
         ]);
         
         DB::table('posts')->insert([
@@ -46,6 +52,8 @@ class PostSeeder extends Seeder
                 'rate' => '103',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
+                'user_id' => '4',
+                'anime_id' => '13'
         ]);
     }
 }
