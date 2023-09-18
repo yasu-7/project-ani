@@ -42,6 +42,7 @@
     
     <div id="sub1">
         <h1>アニメを探す</h1>
+        <a href='/posts/anime'>roll</a>
         <ul id="sample1">
             <li>ランキング</li>
             <li>年代別アニメ</li>
@@ -49,8 +50,14 @@
         </ul>
         <h1>アニメ評価</h1>
         <h1>アニメ一覧</h1>
+        <a href='/posts/anime'>roll</a>
         <h1>オススメアニメ投稿</h1>
+        <a href='/posts/create'>create</a>
         <h1>口コミ一覧</h1>
+        <a href='/posts/comment'>roll2</a>
+        <h1>口コミ投稿</h1>
+        <a href='/posts/comment_create'>create_c</a>
+        
     </div>
     
     <div id="sub2">

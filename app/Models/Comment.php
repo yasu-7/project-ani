@@ -4,10 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    
+    protected $fillable = [
+        'title',
+        'body',
+        'rate',
+        'number',
+        'name',
+        'image',
+        'link',
+        'era',
+        'category_id',
+        'anime_id',
+        'user_id',
+        ];
     
     // Userに対するリレーション
     public function user()
