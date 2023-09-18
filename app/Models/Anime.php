@@ -41,4 +41,10 @@ class Anime extends Model
     {
         return $this->belongsTo(Rank::class);
     }
+    
+    public function getByLimit(int $limit_count = 5)
+    {
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+        return $this->orderBy('id')->limit($limit_count)->get();
+    }
 }

@@ -16,18 +16,18 @@
     <body>
     <div id="page">
     <header>
-        <h1>アニメ投稿一覧</h1>
+        <h1>アニメ一覧</h1>
     </header>
     
     <main>
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <p class='user'>{{$post->user_id}}</p>
-                    <p class='time'>{{$post->created_at}}</p>
-                    <h2 class='title'>{{ $post->title}}</h2>
-                    <p class='body'>{{$post->body}}</p>
-                </div>
+        <div class='animes'>
+            @foreach ($animes as $anime)
+                <div class='anime'>
+                    <h2 class='name'>{{ $anime->name }}</h2>
+                    <p class='body'>{{ $anime->body }}</p>
+                    <p class='image'>{{ $anime->image }}</p>
+                    <p class='link'>{{ $anime->link }}</p>
+                    <p class='era'>{{ $anime->era }}</p>
                 </div>
             @endforeach
         </div>
@@ -44,9 +44,7 @@
         <h1>アニメ評価</h1>
         <h1>アニメ一覧</h1>
         <h1>オススメアニメ投稿</h1>
-        <a href='/posts/create'>create</a>
         <h1>口コミ一覧</h1>
-        <a href='/posts/comment'>roll2</a>
     </div>
     
     <div id="sub2">

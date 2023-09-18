@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', function() {
-    return view('posts.index');
-});
+Route::get('/', [PostController::class, 'index']);
+Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/anime', [PostController::class, 'roll']);
+Route::get('/posts/comment', [PostController::class, 'roll2']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
