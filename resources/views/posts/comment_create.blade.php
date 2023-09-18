@@ -16,33 +16,23 @@
     <body>
     <div id="page">
     <header>
-        <h1>口コミ一覧</h1>
+        <h1>口コミ投稿作成</h1>
     </header>
     
     <main>
         <div class='comments'>
-            @foreach ($comments as $comment)
-                <div class='comment'>
-                    <h2 class='user'>{{ $comment->user_id }}</h2>
-                    <p class='body'>{{ $comment->body }}</p>
-                    <p class='time'>{{ $comment->created_at }}</p>
-                </div>
-            @endforeach
-        </div>
-        <form action="/posts/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
+            <form action="/posts" method="POST">
                 @csrf
-                @method('DELETE')
-                <button type="button" onclick="deletePost({{ $comment->id }})">delete</button> 
-         </form>
-        <div class="edit"><a href="/posts/{{ $comment->id }}/edit">edit</a></div>
-        <script>
-            function deletePost(id) {
-                'use strict'
-                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
-                    document.getElementById(`form_${id}`).submit();
-                }
-            }
-        </script>
+                <div class="body">
+                    <h2>Body</h2>
+                    <textarea name="comment[body]" placeholder="口コミや感想などを投稿"></textarea>
+                    <p class="body__error" style="color:red">{{ $errors->first('comment.body') }}</p>
+                </div>
+                <input type="submit" value="store"/>
+             </form>
+            <div class="back">
+                 [<a href="/">戻る</a>]
+            </div>
     </main>
     
     <div id="sub1">

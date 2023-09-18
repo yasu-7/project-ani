@@ -22,12 +22,12 @@
     <main>
         <div class='animes'>
             @foreach ($animes as $anime)
-                <div class='anime'>
-                    <h2 class='name'>{{ $anime->name }}</h2>
-                    <p class='body'>{{ $anime->body }}</p>
-                    <p class='image'>{{ $anime->image }}</p>
-                    <p class='link'>{{ $anime->link }}</p>
-                    <p class='era'>{{ $anime->era }}</p>
+                <div class='post'>
+                    <p class='name'>{{$anime->name}}</p>
+                    <p class='body'>{{$anime->body}}</p>
+                    <p class='image'>{{$anime->image}}</p>
+                    <p class='link'>{{$anime->link}}</p>
+                    <p class='era'>{{$anime->era}}</p>
                 </div>
             @endforeach
         </div>
@@ -43,8 +43,14 @@
         </ul>
         <h1>アニメ評価</h1>
         <h1>アニメ一覧</h1>
+        <a href='/posts/anime'>roll</a>
         <h1>オススメアニメ投稿</h1>
+        <a href='/posts/create'>create</a>
         <h1>口コミ一覧</h1>
+        <a href='/posts/comment'>roll2</a>
+        <h1>口コミ投稿</h1>
+        <a href='/posts/comment_create'>create_c</a>
+        
     </div>
     
     <div id="sub2">

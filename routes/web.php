@@ -23,6 +23,12 @@ Route::get('/', [PostController::class, 'index']);
 Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/anime', [PostController::class, 'roll']);
 Route::get('/posts/comment', [PostController::class, 'roll2']);
+Route::get('/posts/comment_create', [PostController::class, 'create_c']);
+
+Route::post('/posts', [PostController::class, 'store']);
+Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);
+Route::put('/posts/{comment}', [PostController::class, 'update']);
+Route::delete('/posts/{comment}', [PostController::class,'delete']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
