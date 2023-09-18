@@ -16,26 +16,32 @@
     <body>
     <div id="page">
     <header>
-        <h1>アニメ投稿一覧</h1>
+        <h1>Blog Name</h1>
     </header>
     
     <main>
         <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <p class='user'>{{$post->user_id}}</p>
-                    <p class='time'>{{$post->created_at}}</p>
-                    <h2 class='title'>{{ $post->title}}</h2>
-                    <p class='body'>{{$post->body}}</p>
+            <form action="/posts" method="POST">
+                @csrf
+                <div class="title">
+                    <h2>Title</h2>
+                    <input type="text" name="post[title]" placeholder="タイトル"/>
                 </div>
+                
+                
+                <div class="body">
+                    <h2>Body</h2>
+                    <textarea name="post[body]" placeholder="今日も1日お疲れさまでした。"></textarea>
                 </div>
-            @endforeach
-        </div>
+                <input type="submit" value="store"/>
+             </form>
+             <div class="footer">
+                <a href="/">戻る</a>
+             </div>
     </main>
     
     <div id="sub1">
         <h1>アニメを探す</h1>
-        <a href='/posts/anime'>roll</a>
         <ul id="sample1">
             <li>ランキング</li>
             <li>年代別アニメ</li>
@@ -44,9 +50,7 @@
         <h1>アニメ評価</h1>
         <h1>アニメ一覧</h1>
         <h1>オススメアニメ投稿</h1>
-        <a href='/posts/create'>create</a>
         <h1>口コミ一覧</h1>
-        <a href='/posts/comment'>roll2</a>
     </div>
     
     <div id="sub2">
