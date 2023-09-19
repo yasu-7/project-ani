@@ -37,30 +37,19 @@ class PostController extends Controller
     return view('posts.comment_create');
     }
     
-    /*--アニメ一覧--*/
-    public function show()
-    {
-        return view('posts.anime');
-    }
-    
-    /*--口コミ一覧--*/
-    public function show2()
-    {
-        return view('posts.comment');
-    }
-    
     /*--口コミ作成用--*/
     public function store(Comment $comment, PostRequest $request) // 引数をRequestからPostRequestにする
     {
         $input = $request['comment'];
+        $input += ['user_id' => $request->user()->id];
         $comment->fill($input)->save();
-        return redirect('/posts/' . $comment->id);
+        return redirect('/posts/comment');
     }
     
     /*--口コミ編集--*/
     public function edit(Comment $comment)
     {
-        return view('posts.edit')->with(['comment' => $comment]);
+        return view('posts.comment_edit')->with(['comment' => $comment]);
     }
     
     public function update(PostRequest $request, Comment $comment)

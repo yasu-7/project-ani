@@ -21,7 +21,7 @@
     
     <main>
         <div class='comments'>
-            <form action="/posts" method="POST">
+            <form action="/comments" method="POST">
                 @csrf
                 <div class="body">
                     <h2>Body</h2>

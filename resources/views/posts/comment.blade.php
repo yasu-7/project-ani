@@ -24,6 +24,7 @@
             @foreach ($comments as $comment)
                 <div class='comment'>
                     <h2 class='user'>{{ $comment->user_id }}</h2>
+                    <h2 class='user'>{{ $comment->user->name }}</h2>
                     <p class='body'>{{ $comment->body }}</p>
                     <p class='time'>{{ $comment->created_at }}</p>
                 </div>

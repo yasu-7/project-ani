@@ -12,16 +12,7 @@ class Comment extends Model
     use SoftDeletes;
     
     protected $fillable = [
-        'title',
         'body',
-        'rate',
-        'number',
-        'name',
-        'image',
-        'link',
-        'era',
-        'category_id',
-        'anime_id',
         'user_id',
         ];
     
