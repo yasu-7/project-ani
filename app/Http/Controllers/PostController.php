@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Anime;
 use App\Models\Comment;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -49,7 +50,12 @@ class PostController extends Controller
     /*--口コミ編集--*/
     public function edit(Comment $comment)
     {
+        if(Auth::id() == $comment->user_id){
         return view('posts.comment_edit')->with(['comment' => $comment]);
+        
+        } else {
+            return redirect('/posts/comment');
+        }
     }
     
     public function update(PostRequest $request, Comment $comment)
