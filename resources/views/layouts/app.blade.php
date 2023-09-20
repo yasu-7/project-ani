@@ -31,6 +31,13 @@
             <main>
                 {{ $slot }}
             </main>
+            @if (isset($sub1))
+                {{ $sub1 }}
+            @endif
+            
+            @if (isset($sub2))
+                {{ $sub2 }}
+            @endif
         </div>
     </body>
 </html>

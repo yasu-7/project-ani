@@ -14,13 +14,13 @@ use App\Http\Controllers\PostController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [PostController::class, 'index']);
+    //Route::get('/', [PostController::class, 'index']);
     Route::get('/posts/create', [PostController::class, 'create']);
     Route::get('/posts/anime', [PostController::class, 'roll']);
     Route::get('/posts/comment', [PostController::class, 'roll2']);
