@@ -98,5 +98,61 @@ class AnimeSeeder extends Seeder
                 'category_id' => '5'
         ]);
         
+         DB::table('animes')->insert([
+                'name' => '七つの大罪　黙示録の四騎士',
+                'body' => '主人公最強',
+                'image' => '画像データ',
+                'link' => 'リンクをはる',
+                'era' => '2023',
+                'category_id' => '1'
+    
+        ]);
+        
+        DB::table('animes')->insert([
+                'name' => '東京リベンジャーズ天竺編',
+                'body' => '主人公最強',
+                'image' => '画像データ',
+                'link' => 'リンクをはる',
+                'era' => '2023',
+                'category_id' => '4'
+        ]);
+        
+        DB::table('animes')->insert([
+                'name' => '陰の実力者になりたくて！ 2nd season',
+                'body' => '主人公最強',
+                'image' => '画像データ',
+                'link' => 'リンクをはる',
+                'era' => '2023',
+                'category_id' => '1'
+        ]);
+        
+         DB::table('animes')->insert([
+                'name' => '東京喰種トウキョウグール',
+                'body' => '主人公最強',
+                'image' => '画像データ',
+                'link' => 'https://www.marv.jp/special/tokyoghoul/first/index.html',
+                'era' => '2014',
+                'category_id' => '1'
+    
+        ]);
+        
+        DB::table('animes')->insert([
+                'name' => 'アルスラーン戦記',
+                'body' => '主人公最強',
+                'image' => '画像データ',
+                'link' => 'https://arslan.jp/index2.html',
+                'era' => '2015',
+                'category_id' => '1'
+        ]);
+        
+        DB::table('animes')->insert([
+                'name' => 'マギ',
+                'body' => '主人公最強',
+                'image' => '画像データ',
+                'link' => 'https://www.project-magi.com/',
+                'era' => '2012',
+                'category_id' => '1'
+        ]);
+        
     }
 }

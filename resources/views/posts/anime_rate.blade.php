@@ -6,21 +6,27 @@
     <x-slot name="slot">
         <div class='posts'>
             <form action="/posts" method="POST">
-                <div class="title">
-                    <h2>Title</h2>
-                    <textarea name="commentp[title]" placeholder="タイトル"></textarea>
-                </div>
+                @csrf
+                <div class="title">{{ $anime->name }}</h2></div>
                 
-                <div>
-                    <h2>1</h2>
-                    <textarea name="commentp[title]" placeholder="タイトル"></textarea>
+                 <div class="category_id">
+                    <h2>アニメid</h2>
+                    <textarea name="post[anime_id]" placeholder="作品名">{{ $anime->id }}</textarea>
+                    
+                <div class="title2">
+                    <h2>Title</h2>
+                    <textarea name="post[title]" placeholder="作品名"></textarea>
                 </div>
                 
                 <div class="body">
                     <h2>Body</h2>
-                    <textarea name="commentp[body]" placeholder="感想"></textarea>
+                    <textarea name="post[body]" placeholder="口コミや感想などを投稿"></textarea>
                 </div>
                 
+                <div class="rate">
+                    <h2>rate</h2>
+                    <textarea name="post[rate]" placeholder="0～5段階評価"></textarea>
+                </div>
                 <input type="submit" value="store_p"/>
              </form>
             <div class="back">

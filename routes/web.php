@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,7 @@ use App\Http\Controllers\PostController;
 |
 */
 Route::get('/', [PostController::class, 'index']);
+Route::get('/view', [RankController::class, 'rank_view']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -22,14 +24,22 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     //Route::get('/', [PostController::class, 'index']);
     Route::get('/posts/create', [PostController::class, 'create']);
-    Route::get('/posts/anime', [PostController::class, 'roll']);
-    Route::get('/posts/comment', [PostController::class, 'roll2']);
     Route::get('/posts/comment_create', [PostController::class, 'create_c']);
     
+    Route::get('/posts/{anime}/anime_rate', [PostController::class, 'rate']);
+
     Route::post('/comments', [PostController::class, 'store']);
+    Route::post('/posts', [PostController::class, 'store_p']);
+    
+    Route::get('/posts/anime', [PostController::class, 'show']);
+    Route::get('/posts/comment', [PostController::class, 'show_comment']);
+    
+    
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{comment}', [PostController::class, 'update']);
     Route::delete('/posts/{comment}', [PostController::class,'delete']);
+    
+    
 });
 
 
