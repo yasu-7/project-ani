@@ -4,14 +4,20 @@
     </x-slot>
     
     <x-slot name="slot">
-        <div class='posts'>
-            @foreach ($posts as $post)
+        <div class='commentps'>
+            @foreach ( $commentps as $commentp)
                 <div class='post'>
-                    <p class='user'>{{$post->user_id}}</p>
-                    <p class='time'>{{$post->created_at}}</p>
-                    <h2 class='title'>{{ $post->title}}</h2>
-                    <p class='body'>{{$post->body}}</p>
+                    <p class='user'>{{$commentp->user_id}}</p>
+                    <p class='time'>{{ $commentp->created_at }}</p>
+                    <h2 class='title'>{{$commentp->title}}</h2>
+                    <p class='body'>{{$commentp->body}}</p>
                 </div>
+            @endforeach
+        </div>
+        <div>
+            @foreach($ranks_data as $rank_data)
+                <p>{{$rank_data->number}}
+                {{$rank_data->anime_id}}</p>
             @endforeach
         </div>
     </x-slot>

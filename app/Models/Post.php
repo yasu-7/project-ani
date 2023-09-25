@@ -27,9 +27,9 @@ class Post extends Model
         ];
     
     //Animeに対するリレーション「1対多」の関係なので'posts'と複数形に
-    public function animes() 
+    public function anime() 
     {
-        return $this->hasMany(Anime::class);
+        return $this->belongsTo(Anime::class);
     }
     
     //Userに対するリレーション「多対1」の関係なので'posts'と複数形に

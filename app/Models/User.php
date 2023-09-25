@@ -60,6 +60,13 @@ class User extends Authenticatable
         return $this->hasOne(Comment::class);
     }
     
+    // comment_postに対するリレーション
+    public function commentp() 
+    {
+        return $this->hasOne(Commentp::class);
+    }
+    
+    
     // Postに対するリレーション
     //「多対1」の関係なので単数系に
     public function posts()
@@ -71,6 +78,6 @@ class User extends Authenticatable
     //「1対多」の関係なので単数系に
     public function ranks()
     {
-        return $this->belongsTo(Rank::class);
+        return $this->hasMany(Rank::class);
     }
 }

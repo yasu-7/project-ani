@@ -6,7 +6,7 @@
     <x-slot name="slot">
         <div class='animes'>
             @foreach ($animes as $anime)
-                <div class='anime'>
+                <div class='post'>
                     <p class='id'>{{$anime->id}}</p>
                     <p class='name'>{{$anime->name}}</p>
                     <p class='body'>{{$anime->body}}</p>

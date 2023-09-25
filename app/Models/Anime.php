@@ -30,9 +30,9 @@ class Anime extends Model
     
     // Postに対するリレーション
     //「1対多」の関係なので単数系に
-    public function post()
+    public function posts()
     {
-        return $this->belongsTo(Post::class);
+        return $this->hasMany(Post::class);
     }
     
     // Rankに対するリレーション
