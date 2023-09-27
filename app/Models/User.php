@@ -71,7 +71,7 @@ class User extends Authenticatable
     //「多対1」の関係なので単数系に
     public function posts()
     {
-        return $this->belongsTo(Post::class);
+        return $this->hasMany(Post::class);
     }
     
     // Rankに対するリレーション

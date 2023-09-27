@@ -37,6 +37,12 @@ class PostController extends Controller
         return view('posts.comment')->with(['comments' => $comment->getByLimit()]);
     }
     
+    /*-- アニメ一覧の表示--*/
+    public function show_post(Post $post)
+    {
+        return view('posts.anime_rate_v')->with(['posts' => $post->getByLimit()]);
+    }
+    
     /*--アニメ投稿--*/
     public function create()
     {
@@ -59,12 +65,12 @@ class PostController extends Controller
     }
     
     /*--アニメ作成用--*/
-    public function store_p(Post $post, AnimeRequest $request, Anime $anime) // 引数をRequestからPostRequestにする
+    public function store_p(Post $post, Request $request, Anime $anime) // 引数をRequestからPostRequestにする
     {
         $input = $request['post'];
         $input += ['user_id' => $request->user()->id];
         $post->fill($input)->save();
-        return redirect('/posts/anime');
+        return redirect('/posts/anime_rate_v');
     }
     
     public function store_pp(Commentp $commentp, Rank $rank, Request $request) // 引数をRequestからPostRequestにする
@@ -110,9 +116,7 @@ class PostController extends Controller
     /*--口コミ編集--*/
     public function rate(Anime $anime, Post $post)
     {
-        return view('posts.anime_rate')->with(['anime' => $anime]);
-        return view('posts.anime_rate')->with(['posts' => $post]);
-        
+        return view('posts.anime_rate')->with(['anime' => $anime,'post' => $post]);
     }
     
     public function update(PostRequest $request, Comment $comment)

@@ -36,7 +36,7 @@ class Post extends Model
     //Userに対するリレーション「多対1」の関係なので'posts'と複数形に
     public function user() 
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
     
     public function getByLimit(int $limit_count = 5)
