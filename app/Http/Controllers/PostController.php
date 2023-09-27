@@ -10,6 +10,8 @@ use App\Models\Commentp;
 use App\Models\Rank;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\AnimeRequest;
+use App\Http\Requests\CommentpRequest;
+use App\Http\Requests\RankRequest;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -65,6 +67,34 @@ class PostController extends Controller
         return redirect('/posts/anime');
     }
     
+    public function store_pp(Commentp $commentp, Rank $rank, Request $request) // 引数をRequestからPostRequestにする
+    {
+        $user_id = Auth::id();
+        /*
+        $input = $requestp['commentp'];
+        $input += ['user_id' => $requestp->user()->id];
+        $commentp->fill($input)->save();
+        */
+        $input_rank = $request['rank'];
+        $input_commentp = $request['comment'];
+        $input_commentp += ['user_id' => $user_id];
+        $commentp->fill($input_commentp)->save();
+        
+        
+        $comment_id = $commentp->orderBy('id', 'DESC')->first()->id;
+        
+        foreach(array_map(null,$input_rank['number'], $input_rank['title']) as [$number,$title])
+        {
+            $rank = new Rank();
+            $rank->number = $number;
+            $rank->title = $title;
+            $rank->user_id = $user_id;
+            $rank->commentp_id = $comment_id;
+            $rank->save();
+        }
+        
+        return redirect('/');
+    }
     
     /*--口コミ編集--*/
     public function edit(Comment $comment)

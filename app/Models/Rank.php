@@ -9,6 +9,17 @@ class Rank extends Model
 {
     use HasFactory;
     
+    
+    protected $fillable = [
+        'title',
+        'number',
+        'user_id',
+        'commentp_id',
+        ];
+        
+    public $timestamps = false; // 追加
+    
+    
     //Animeに対するリレーション「1対多」の関係なので'posts'と複数形に
     public function animes() 
     {

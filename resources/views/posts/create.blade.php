@@ -1,32 +1,39 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1>アニメ評価編集</h1>
+        <h1>アニメ投稿編集</h1>
     </x-slot>
     
     <x-slot name="slot">
         <div class='posts'>
-            <form action="/posts" method="POST">
+            <form action="/commentps" method="POST">
+                @csrf
+               
                 <div class="title">
                     <h2>Title</h2>
-                    <textarea name="commentp[title]" placeholder="タイトル"></textarea>
+                    <textarea name="comment[title]" placeholder="タイトル"></textarea>
                 </div>
+               
+                <textarea name="rank[number][]" >1</textarea>
+                <textarea name="rank[title][]"placeholder="タイトル" ></textarea>
                 
+                <textarea name="rank[number][]" >2</textarea>
+                <textarea name="rank[title][]"placeholder="タイトル" ></textarea>
+                
+                <textarea name="rank[number][]" >3</textarea>
+                <textarea name="rank[title][]"placeholder="タイトル" ></textarea>
+        
+               
                 <div>
-                    <h2>1</h2>
-                    <textarea name="rank[title]" placeholder="タイトル"></textarea>
-                    <textarea name="rank[title]" placeholder="タイトル"></textarea>
-                </div>
-                
-                <div class="body">
                     <h2>Body</h2>
-                    <textarea name="commentp[body]" placeholder="感想"></textarea>
+                    <textarea name="comment[body]" placeholder="感想"></textarea>
                 </div>
-                
-                <input type="submit" value="store_p"/>
+              
+                <input type="submit" value="store_pp"/>
              </form>
             <div class="back">
                  [<a href="/">戻る</a>]
             </div>
+        </div>
     </x-slot>
              
     <x-slot name="sub1">
