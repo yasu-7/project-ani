@@ -24,14 +24,12 @@
         <div id="sub1">
         <h1>アニメを探す</h1>
         <a href='/posts/anime'>roll</a>
-        <ul id="sample1">
-            <li>ランキング</li>
-            <li>年代別アニメ</li>
-            <li>ジャンル別アニメ</li>
-        </ul>
-        <h1>アニメ評価</h1>
         <h1>アニメ一覧</h1>
         <a href='/posts/anime'>roll</a>
+        <h1>アニメ評価一覧</h1>
+        <a href='/posts/anime_rate_v'>ro</a>
+        <h1>ランキング</h1>
+        <a href='/posts/anime_ranking'>rol</a>
         <h1>オススメアニメ投稿</h1>
         <a href='/posts/create'>create</a>
         <h1>口コミ一覧</h1>

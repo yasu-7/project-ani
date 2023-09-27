@@ -31,13 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{anime}/anime_rate', [PostController::class, 'rate']);
 
     Route::post('/comments', [PostController::class, 'store']);
-    Route::post('/posts', [PostController::class, 'store_p']);
+    Route::post('/posts/{anime}', [PostController::class, 'store_p']);
     Route::post('/commentps', [PostController::class, 'store_pp']);
     
     Route::get('/posts/anime', [PostController::class, 'show']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
     Route::get('/posts/anime_ranking', [RankController::class, 'ranking']);
-    
+    Route::get('/posts/anime_rate_v', [PostController::class, 'show_post']);
     
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{comment}', [PostController::class, 'update']);
