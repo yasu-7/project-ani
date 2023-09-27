@@ -38,6 +38,7 @@ class CommentpSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'user_id' => '3',
+               
         ]);
         
         DB::table('commentps')->insert([
@@ -46,6 +47,7 @@ class CommentpSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'user_id' => '4',
+                
         ]);
         
         DB::table('commentps')->insert([
@@ -54,6 +56,7 @@ class CommentpSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
                 'user_id' => '5',
+             
          ]);
     }
 }

@@ -22,6 +22,11 @@ class Commentp extends Model
         return $this->belongsTo(User::class);
     }
     
+    public function ranks()
+    {
+        return $this->hasMany(Rank::class);
+    }
+    
     public function getByLimit(int $limit_count = 5)
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける

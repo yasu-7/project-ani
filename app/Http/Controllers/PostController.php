@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    /*-- アニメ投稿位の表示--*/
-    public function index(Commentp $commentp)
+    /*-- アニメ投稿一覧の表示--*/
+    public function  index(Commentp $commentp, Rank $rank)
     {
-        return view('posts.index')->with(['commentps' => $commentp->getByLimit()]);
+        
+        $rankings = $commentp->orderBy('updated_at', 'DESC')->get();
+        
+        return view('posts.index')->with([ 'rankings' => $rankings]);
     }
     
     /*-- アニメ一覧の表示--*/
