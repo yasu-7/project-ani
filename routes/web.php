@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/posts/anime', [PostController::class, 'show']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
+    Route::get('/posts/anime_ranking', [RankController::class, 'ranking']);
     
     
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);

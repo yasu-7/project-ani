@@ -30,4 +30,12 @@ class RankController extends Controller
         
         return view('posts.view_post')->with([ 'rankings' => $rankings]);
     }
+    
+    public function  ranking(Post $post, Anime $anime)
+    {
+        
+        $ratings = Post::select('anime_id')->selectRaw('AVG(rate) as rate')->groupby('anime_id')->orderBy('rate', 'desc')->get();
+        
+        return view('posts.anime_ranking')->with([ 'ratings' => $ratings]);
+    }
 }
