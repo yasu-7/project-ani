@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/comments', [PostController::class, 'store']);
     Route::post('/posts', [PostController::class, 'store_p']);
+    Route::post('/commentps', [PostController::class, 'store_pp']);
     
     Route::get('/posts/anime', [PostController::class, 'show']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);

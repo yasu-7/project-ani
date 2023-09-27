@@ -9,7 +9,7 @@
                 @csrf
                 <div class="title">{{ $anime->name }}</h2></div>
                 
-                 <div class="category_id">
+                 <div class="anime_id">
                     <input type="hidden" value="{{ $anime->id }}"/>
                     
                 <div class="title2">
