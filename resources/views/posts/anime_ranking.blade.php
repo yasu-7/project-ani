@@ -5,16 +5,15 @@
     
     <x-slot name="slot">
         <div class='animes'>
-            @foreach ($animes as $anime)
-                <div class='post'>
-                    <p class='id'>{{$anime->id}}</p>
-                    <p class='name'>{{$anime->name}}</p>
-                    <p class='body'>{{$anime->body}}</p>
-                    <p class='image'>{{$anime->image}}</p>
-                    <p class='link'>{{$anime->link}}</p>
-                    <p class='era'>{{$anime->era}}</p>
-                    <div class="rate"><a href="/posts/{{ $anime->id }}/anime_rate">アニメ評価</a></div>
-                </div>
+            @foreach ($ratings as $rating)
+            <div class='anime'>
+               <p>{{$rating->anime->name}}</p>
+               <p>{{$rating->anime->body}}</p>
+                <p>{{$rating->anime->image}}</p>
+                <p>{{$rating->anime->link}}</p>
+                <p>{{$rating->anime->era}}</p>
+                <p>アニメ評価：{{$rating->rate}}</p>
+            </div>
             @endforeach
         </div>
     </x-slot>
@@ -25,6 +24,7 @@
         <a href='/posts/anime'>roll</a>
         <ul id="sample1">
             <li>ランキング</li>
+            <a href='/posts/anime_ranking'>rol</a>
             <li>年代別アニメ</li>
             <li>ジャンル別アニメ</li>
         </ul>
