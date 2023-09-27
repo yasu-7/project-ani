@@ -21,5 +21,8 @@ class Rank extends Model
         return $this->hasMany(User::class);
     }
     
+    public function commentp(){
+    return $this->belongTo(Commentp::class);
+    }
     
 }

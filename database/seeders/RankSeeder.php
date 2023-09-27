@@ -17,93 +17,120 @@ class RankSeeder extends Seeder
     {
         DB::table('ranks')->insert([
                 'number' => '1',
-                'anime_id' => '6',
-                'user_id' => '1'
+                'title' => 'ソードアートオンラインⅡ',
+                'user_id' => '1',
+                'commentp_id' => '1',
+                
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '2',
-                'anime_id' => '10',
-                'user_id' => '1'
+                'title' => 'ソードアートオンライン',
+                'user_id' => '1',
+                'commentp_id' => '1',
+               
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '3',
-                'anime_id' => '13',
-                'user_id' => '1'
+                'title' => '東京喰種トウキョウグール',
+                'user_id' => '1',
+                'commentp_id' => '1',
+               
         ]);
         
         
         DB::table('ranks')->insert([
                 'number' => '1',
-                'anime_id' => '7',
-                'user_id' => '2'
+                'title' => '氷菓',
+                'user_id' => '2',
+                'commentp_id' => '2',
+               
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '2',
-                'anime_id' => '9',
-                'user_id' => '2'
+                'title' => '荒川アンダーザブリッジ',
+                'user_id' => '2',
+                'commentp_id' => '2',
+               
         ]);
        
        DB::table('ranks')->insert([
                 'number' => '3',
-                'anime_id' => '13',
-                'user_id' => '2'
+                'title' => '東京喰種トウキョウグール',
+                'user_id' => '2',
+                'commentp_id' => '2',
+               
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '1',
-                'anime_id' => '12',
-                'user_id' => '3'
+                'title' => '陰の実力者になりたくて！ 2nd season',
+                'user_id' => '3',
+                'commentp_id' => '3',
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '2',
-                'anime_id' => '8',
-                'user_id' => '3'
+                'title' => '氷菓',
+                'user_id' => '3',
+                'commentp_id' => '3',
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '3',
-                'anime_id' => '6',
-                'user_id' => '3'
+                'title' => 'アルドノア・ゼロ',
+                'user_id' => '3',
+                'commentp_id' => '3',
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '1',
-                'anime_id' => '2',
-                'user_id' => '4'
+                'title' => '機動戦士ガンダムユニコーン RE：0096',
+                'user_id' => '4',
+                'commentp_id' => '4',
+
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '2',
-                'anime_id' => '1',
-                'user_id' => '4'
+                'title' => '機動戦士ガンダムSEED HDリマスター',
+                'user_id' => '4',
+                'commentp_id' => '4',
+         
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '3',
-                'anime_id' => '3',
-                'user_id' => '4'
+                'title' => '転生したらスライムだった件',
+                'user_id' => '4',
+                'commentp_id' => '4',
+          
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '1',
-                'anime_id' => '7',
-                'user_id' => '11'
+                'title' => 'マギ',
+                'user_id' => '14',
+                'commentp_id' => '5',
+               
         ]);
         
         DB::table('ranks')->insert([
                 'number' => '2',
-                'anime_id' => '9',
-                'user_id' => '11'
+                'title' => '七つの大罪　黙示録の四騎士',
+                'user_id' => '14',
+                'commentp_id' => '5',
+               
         ]);
        
        DB::table('ranks')->insert([
                 'number' => '3',
-                'anime_id' => '13',
-                'user_id' => '11'
+                'title' => 'ぐらんぶる',
+                'user_id' => '14',
+                'commentp_id' => '5',
+              
         ]);
     }
 }

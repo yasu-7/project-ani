@@ -23,6 +23,7 @@ class Post extends Model
         'category_id',
         'anime_id',
         'user_id',
+        'rank_id',
         
         ];
     

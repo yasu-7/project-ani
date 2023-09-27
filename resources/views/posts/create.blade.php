@@ -13,7 +13,8 @@
                 
                 <div>
                     <h2>1</h2>
-                    <textarea name="commentp[title]" placeholder="タイトル"></textarea>
+                    <textarea name="rank[title]" placeholder="タイトル"></textarea>
+                    <textarea name="rank[title]" placeholder="タイトル"></textarea>
                 </div>
                 
                 <div class="body">

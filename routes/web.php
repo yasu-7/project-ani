@@ -17,6 +17,8 @@ use App\Http\Controllers\RankController;
 */
 Route::get('/', [PostController::class, 'index']);
 Route::get('/view', [RankController::class, 'rank_view']);
+Route::get('/view_post', [RankController::class, 'post_view']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

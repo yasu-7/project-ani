@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('ranks', function (Blueprint $table) {
-            $table->foreignId('anime_id')->constrained();
+            $table->foreignId('commentp_id')->constrained();
         });
     }
 

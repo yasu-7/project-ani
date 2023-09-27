@@ -10,8 +10,7 @@
                 <div class="title">{{ $anime->name }}</h2></div>
                 
                  <div class="category_id">
-                    <h2>アニメid</h2>
-                    <textarea name="post[anime_id]" placeholder="作品名">{{ $anime->id }}</textarea>
+                    <input type="hidden" value="{{ $anime->id }}"/>
                     
                 <div class="title2">
                     <h2>Title</h2>
