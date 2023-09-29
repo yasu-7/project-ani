@@ -5,7 +5,7 @@
     
     <x-slot name="slot">
         <div class='posts'>
-            <form action="/commentps" method="POST">
+            <form action="/reason" method="POST">
                 @csrf
                
                 <div class="title">

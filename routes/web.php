@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RankController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +31,9 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/posts/{anime}/anime_rate', [PostController::class, 'rate']);
 
-    Route::post('/comments', [PostController::class, 'store']);
-    Route::post('/posts/{anime}', [PostController::class, 'store_p']);
-    Route::post('/commentps', [PostController::class, 'store_pp']);
+    Route::post('/reasons', [PostController::class, 'comment']);
+    Route::post('/posts/{anime}', [PostController::class, 'rate_post']);
+    Route::post('/rank_post', [PostController::class, 'rank_post']);
     
     Route::get('/posts/anime', [PostController::class, 'show']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/posts/{comment}', [PostController::class, 'update']);
     Route::delete('/posts/{comment}', [PostController::class,'delete']);
     
+    Route::get('/posts/like/{anime}', [LikeController::class, 'like'])->name('like');
+    Route::get('/posts/unlike/{anime}', [LikeController::class, 'unlike'])->name('unlike');
     
 });
 

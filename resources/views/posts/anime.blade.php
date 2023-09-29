@@ -15,6 +15,26 @@
                     <p class='era'>{{$anime->era}}</p>
                     <div class="rate"><a href="/posts/{{ $anime->id }}/anime_rate">アニメ評価</a></div>
                 </div>
+            <span>
+             
+            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
+            @if($anime->is_like())
+            <!-- 「いいね」取消用ボタンを表示 -->
+            	<a href="{{ route('like', $anime) }}" class="btn btn-success btn-sm">
+            		いいねする
+            		<!-- 「いいね」の数を表示 -->
+            		{{$anime->likes->count()}}
+            		
+            	</a>
+            @else
+            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+            	<a href="{{ route('unlike', $anime) }}" class="btn btn-secondary btn-sm">
+            		いいね解除
+            		<!-- 「いいね」の数を表示 -->
+            		{{$anime->likes->count()}}
+            	</a>
+            @endif
+            </span>
             @endforeach
         </div>
     </x-slot>

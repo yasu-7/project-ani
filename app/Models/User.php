@@ -45,7 +45,7 @@ class User extends Authenticatable
     // Likeに対するリレーション
     public function likes() 
     {
-        return $this->belongsToMany(Like::class);
+        return $this->hasMany(Like::class);
     }
     
     // Viewに対するリレーション
@@ -61,9 +61,9 @@ class User extends Authenticatable
     }
     
     // comment_postに対するリレーション
-    public function commentp() 
+    public function reason() 
     {
-        return $this->hasOne(Commentp::class);
+        return $this->hasOne(Reason::class);
     }
     
     

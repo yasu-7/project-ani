@@ -5,7 +5,7 @@
     
     <x-slot name="slot">
         <div class='posts'>
-            <form action="/commentps" method="POST">
+            <form action="/reasons" method="POST">
                 @csrf
                
                 <div class="title">
@@ -13,14 +13,14 @@
                     <textarea name="comment[title]" placeholder="タイトル"></textarea>
                 </div>
                
-                <textarea name="rank[number][]" >1</textarea>
-                <textarea name="rank[title][]"placeholder="タイトル" ></textarea>
+                <p><textarea name="rank[number][]" >1</textarea>
+                <textarea name="rank[title][]"placeholder="タイトル" ></textarea></p>
                 
-                <textarea name="rank[number][]" >2</textarea>
-                <textarea name="rank[title][]"placeholder="タイトル" ></textarea>
+                <p><textarea name="rank[number][]" >2</textarea>
+                <textarea name="rank[title][]"placeholder="タイトル" ></textarea></p>
                 
-                <textarea name="rank[number][]" >3</textarea>
-                <textarea name="rank[title][]"placeholder="タイトル" ></textarea>
+                <p><textarea name="rank[number][]" >3</textarea>
+                <textarea name="rank[title][]"placeholder="タイトル" ></textarea></p>
         
                
                 <div>
