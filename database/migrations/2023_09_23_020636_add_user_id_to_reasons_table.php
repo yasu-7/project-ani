@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('commentps', function (Blueprint $table) {
+        Schema::table('reasons', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('commentps', function (Blueprint $table) {
+        Schema::table('reasons', function (Blueprint $table) {
             //
         });
     }

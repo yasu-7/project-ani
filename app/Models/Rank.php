@@ -14,7 +14,7 @@ class Rank extends Model
         'title',
         'number',
         'user_id',
-        'commentp_id',
+        'reason_id',
         ];
         
     public $timestamps = false; // 追加
@@ -32,8 +32,8 @@ class Rank extends Model
         return $this->hasMany(User::class);
     }
     
-    public function commentp(){
-    return $this->belongTo(Commentp::class);
+    public function reason(){
+    return $this->belongTo(Reason::class);
     }
     
 }

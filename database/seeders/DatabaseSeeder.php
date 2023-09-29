@@ -25,8 +25,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             AnimeSeeder::class,
-            CommmentSeeder::class,
+            CommentSeeder::class,
             PostSeeder::class,
+            ReasonSeeder::class,
+            RankSeeder::class,
         ]);
     }
 }

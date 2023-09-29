@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Anime extends Model
 {
@@ -12,7 +13,7 @@ class Anime extends Model
     // Likeに対するリレーション
     public function likes() 
     {
-        return $this->belongsToMany(Like::class);
+        return $this->hasMany(Like::class);
     }
     
     // Viewに対するリレーション
@@ -46,5 +47,10 @@ class Anime extends Model
     {
     // updated_atで降順に並べたあと、limitで件数制限をかける
         return $this->orderBy('id')->limit($limit_count)->get();
+    }
+    
+    public function is_like()
+    {
+        return is_null(Like::where('anime_id', $this->id)->where('user_id', Auth::id())->first());
     }
 }

@@ -4,15 +4,15 @@
     </x-slot>
     
     <x-slot name="slot">
-        <div class='commentps'>
+        <div class='ranking'>
             @foreach ( $rankings as $ranking)
-            <p>{{$ranking->user->name}}</p>
-            <p>{{$ranking->updated_at}}</p>
-            <p>{{$ranking->title}}</p>
+            <p>ユーザー名：{{$ranking->user->name}}</p>
+            <p>投稿日{{$ranking->updated_at}}</p>
+            <p>タイトル：{{$ranking->title}}</p>
                 @foreach($ranking->ranks as $rank)
                 <div>
-                    {{$rank->number}}
-                    {{$rank->title}}
+                    順位：{{$rank->number}}
+                    作品名：{{$rank->title}}
                 </div>
                 @endforeach
             {{$ranking->body}}

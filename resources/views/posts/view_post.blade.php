@@ -4,7 +4,7 @@
     </x-slot>
     
     <x-slot name="slot">
-        <div class='commentps'>
+        <div class='ranking'>
             @foreach ( $rankings as $ranking)
             <p>{{$ranking->user->name}}</p>
             <p>{{$ranking->updated_at}}</p>

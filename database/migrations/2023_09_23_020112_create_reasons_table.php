@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('likes', function (Blueprint $table) {
-            $table->foreignId('anime_id')->constrained();
+        Schema::create('reasons', function (Blueprint $table) {
+            $table->id();
+            $table->string('title', 200);
+            $table->string('body', 200);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('likes', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('reasons');
     }
 };

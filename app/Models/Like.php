@@ -9,6 +9,13 @@ class Like extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'anime_id',
+        'user_id',
+        ];
+        
+    public $timestamps = false; // 追加
+    
     // Userに対するリレーション
     public function users() 
     {
