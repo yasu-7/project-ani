@@ -30,5 +30,11 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    
+    'annict' => [
+        'annict_id' => env('ANNICT_APPLICATION_ID', false),
+        'annict_key' => env('ANNICT_APPLICATION_SEACRET', false),
+        'access_token' => env('ANNICT_ACCESS_TOKEN', false),
+    ],
 
 ];

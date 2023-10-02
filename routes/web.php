@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RankController;
 use App\Http\Controllers\LikeController;
-
+use App\Http\Controllers\AnnictController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
     Route::get('/posts/anime_ranking', [RankController::class, 'ranking']);
     Route::get('/posts/anime_rate_v', [PostController::class, 'show_post']);
+    Route::get('/anime/show',[AnnictController::class, 'show_annict']);
+    Route::get('/anime/search',[AnnictController::class, 'search_annict']);
     
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{comment}', [PostController::class, 'update']);

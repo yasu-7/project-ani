@@ -9,6 +9,12 @@ class View extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'count',
+        'anime_id',
+        'user_id',
+    ];
+    
     // Userに対するリレーション
     public function users() 
     {
