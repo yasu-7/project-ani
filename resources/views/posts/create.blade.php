@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1>アニメ投稿編集</h1>
+        <h1>アニメランキング投稿</h1>
     </x-slot>
     
     <x-slot name="slot">
@@ -10,22 +10,21 @@
                
                 <div class="title">
                     <h2>Title</h2>
-                    <textarea name="comment[title]" placeholder="タイトル"></textarea>
+                    <textarea name="reason[title]" placeholder="タイトル"></textarea>
                 </div>
                
-                <p><textarea name="rank[number][]" >1</textarea>
-                <textarea name="rank[title][]"placeholder="タイトル" ></textarea></p>
+                <p><input type='hidden' name="rank[number][]" value=1 >
+                1<input type="textbox" name="rank[title][]"value="タイトル" ></p>
                 
-                <p><textarea name="rank[number][]" >2</textarea>
-                <textarea name="rank[title][]"placeholder="タイトル" ></textarea></p>
+                <p><input type='hidden' name="rank[number][]" value=2 >
+                2<input type="textbox" name="rank[title][]"value="タイトル" ></p>
                 
-                <p><textarea name="rank[number][]" >3</textarea>
-                <textarea name="rank[title][]"placeholder="タイトル" ></textarea></p>
-        
-               
+                <p><input type='hidden' name="rank[number][]" value=3 >
+                3<input type="textbox" name="rank[title][]"value="タイトル" ></p>
+                
                 <div>
                     <h2>Body</h2>
-                    <textarea name="comment[body]" placeholder="感想"></textarea>
+                    <textarea name="reason[body]" placeholder="感想"></textarea>
                 </div>
               
                 <input type="submit" value="store_pp"/>

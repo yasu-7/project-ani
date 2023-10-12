@@ -9,11 +9,13 @@ use App\Models\Comment;
 use App\Models\Reason;
 use App\Models\Rank;
 use App\Models\Like;
+use App\Models\AccessCounter;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\AnimeRequest;
 use App\Http\Requests\CommentpRequest;
 use App\Http\Requests\RankRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class PostController extends Controller
 {
@@ -59,6 +61,27 @@ class PostController extends Controller
     return view('posts.comment_create');
     }
     
+    /*--アニメ詳細画面--*/
+    public function anime_view($id)
+    {
+        dd($id);
+        $anime = Anime::find($id);
+        $accessCounter = AccessCounter::where('anime_id', $anime->id);
+      
+        if ($accessCounter->exists() == null){
+            $accessCounter = New AccessCounter();
+            $accessCounter->anime_id = $anime->id;
+            $accessCounter->count = 1;
+            $accessCounter->save();
+        } else{
+            $accessCounter = AccessCounter::where('anime_id', $anime->id)->first();
+            //dd($accessCounter);
+            $accessCounter->count += 1;
+            $accessCounter->save();
+        }
+        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter]);
+    }
+    
     /*--口コミ作成用--*/
     public function comment(Comment $comment, PostRequest $request) // 引数をRequestからPostRequestにする
     {
@@ -77,16 +100,17 @@ class PostController extends Controller
         return redirect('/posts/anime_rate_v');
     }
     
+     /*--アニメranking投稿--*/
     public function rank_post(Reason $reason, Rank $rank, Request $request) // 引数をRequestからPostRequestにする
     {
         $user_id = Auth::id();
         $input_rank = $request['rank'];
-        $input_commentp = $request['comment'];
-        $input_commentp += ['user_id' => $user_id];
-        $reason->fill($input_commentp)->save();
+        $input_reason = $request['reason'];
+        $input_reason += ['user_id' => $user_id];
+        $reason->fill($input_reason)->save();
         
         
-        $comment_id = $reason->orderBy('id', 'DESC')->first()->id;
+        $reason_id = $reason->orderBy('id', 'DESC')->first()->id;
         
         foreach(array_map(null,$input_rank['number'], $input_rank['title']) as [$number,$title])
         {
@@ -94,7 +118,7 @@ class PostController extends Controller
             $rank->number = $number;
             $rank->title = $title;
             $rank->user_id = $user_id;
-            $rank->reason_id = $comment_id;
+            $rank->reason_id = $reason_id;
             $rank->save();
         }
         
@@ -112,10 +136,16 @@ class PostController extends Controller
         }
     }
     
-    /*--口コミ編集--*/
-    public function rate(Anime $anime, Post $post)
+    /*--評価投稿--*/
+    public function rate($id,Post $post)
     {
-        return view('posts.anime_rate')->with(['anime' => $anime,'post' => $post]);
+        $access_token = config('services.annict.access_token');
+        $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_ids={$id}";
+        $response = Http::get($url);
+        $datas = $response->json($key = null, $default = null)["works"];
+        $count = $response->json($key = null, $default = null)["total_count"];
+        
+        return view('posts.anime_rate')->with(['datas' => $datas,'post' => $post,"count" => $count]);
     }
     
     public function update(PostRequest $request, Comment $comment)
@@ -124,6 +154,15 @@ class PostController extends Controller
     $comment->fill($input_comment)->save();
 
     return redirect('/posts/comment');
+    }
+    
+    /*--アニメranking投稿編集--*/
+    public function edit_ranking($id,Reason $reason, Rank $rank)
+    {
+        $reason = Reason::where('user_id',$id)->first();
+        $rank = Rank::where('user_id',$id)->get()->toArray();
+        $user = Auth::user();
+        return view('posts.edit')->with(['rank' => $rank, 'reason' => $reason, 'user' => $user]);
     }
     
     public function delete(Comment $comment)

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('animes', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id');
             $table->string('name', 100);
             $table->string('body', 200);
             $table->string('image', 100);

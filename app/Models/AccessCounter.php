@@ -5,25 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class View extends Model
+class AccessCounter extends Model
 {
     use HasFactory;
     
     protected $fillable = [
         'count',
         'anime_id',
-        'user_id',
+        'id',
     ];
     
+    public $timestamps = false; // 追加
+    
     // Userに対するリレーション
-    public function users() 
-    {
-        return $this->belongsToMany(User::class);
-    }
     
     // Animeに対するリレーション
-    public function animes() 
+    public function anime() 
     {
-        return $this->belongsToMany(Anime::class);
+        return $this->hasOne(Anime::class);
     }
 }

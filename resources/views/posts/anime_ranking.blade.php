@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1>アニメ一覧</h1>
+        <h1>アニメランキング</h1>
     </x-slot>
     
     <x-slot name="slot">
