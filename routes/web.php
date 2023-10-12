@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RankController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\AnnictController;
+use App\Http\Controllers\AccessController;
+/*
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,11 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/create', [PostController::class, 'create']);
     Route::get('/posts/comment_create', [PostController::class, 'create_c']);
     
-    Route::get('/posts/{anime}/anime_rate', [PostController::class, 'rate']);
+    Route::get('/posts/{id}/anime_rate', [PostController::class, 'rate']);
+    Route::get('/posts/{anime}/anime_view', [PostController::class, 'anime_view']);
 
-    Route::post('/reasons', [PostController::class, 'comment']);
-    Route::post('/posts/{anime}', [PostController::class, 'rate_post']);
-    Route::post('/rank_post', [PostController::class, 'rank_post']);
+    Route::post('/comments', [PostController::class, 'comment']);
+    Route::post('/posts/{datas}', [PostController::class, 'rate_post']);
+    Route::post('/reasons', [PostController::class, 'rank_post']);
     
     Route::get('/posts/anime', [PostController::class, 'show']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
@@ -46,8 +49,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/posts/{comment}', [PostController::class, 'update']);
     Route::delete('/posts/{comment}', [PostController::class,'delete']);
     
+    Route::get('/posts/{id}/edit_post', [PostController::class, 'edit_ranking']);
+    Route::put('/posts/{id}', [PostController::class, 'update']);
+    Route::delete('/posts/{id}', [PostController::class,'delete']);
+    
     Route::get('/posts/like/{anime}', [LikeController::class, 'like'])->name('like');
     Route::get('/posts/unlike/{anime}', [LikeController::class, 'unlike'])->name('unlike');
+    
+    Route::get('/posts/{anime}/anime_count',[AccessController::class, 'index']);
     
 });
 

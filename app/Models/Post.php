@@ -24,6 +24,7 @@ class Post extends Model
         'anime_id',
         'user_id',
         'rank_id',
+        'reason_id',
         
         ];
     

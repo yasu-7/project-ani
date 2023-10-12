@@ -1,20 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1>アニメ評価編集</h1>
+        <h1>アニメ評価</h1>
     </x-slot>
     
     <x-slot name="slot">
         <div class='posts'>
-            <form action="/posts/{{$anime->id}}" method="POST">
+            <form action="/posts/{{$datas[$count-1]["id"]}}" method="POST">
                 @csrf
-                <div class="title">{{ $anime->name }}</h2></div>
+                <div class="title">{{$datas[$count-1]["title"]}}</h2></div>
                 
                  <div class="anime_id">
-                    <input type="hidden" name="post[anime_id]" value="{{ $anime->id }}"/>
+                    <input type="hidden" name="post[anime_id]" value="{{$datas[$count-1]["id"]}}"/>
                     
                 <div class="title2">
                     <h2>Title</h2>
-                    <textarea name="post[title]" placeholder="作品名"></textarea>
+                    <textarea name="post[title]" placeholder="{{$datas[$count-1]["title"]}}">{{$datas[$count-1]["title"]}}</textarea>
                 </div>
                 
                 <div class="body">

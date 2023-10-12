@@ -1,13 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1>アニメ一覧</h1>
+        <h1>アニメの詳細</h1>
     </x-slot>
     
     <x-slot name="slot">
         <div class='animes'>
-            @foreach ($animes as $anime)
                 <div class='anime'>
-                    <div class="rate"><a href="/posts/{{ $anime->id }}/anime_view">{{$anime->name}}</a></div>
+                    <p class='name'>{{$anime->name}}</p>
                     <p class='body'>{{$anime->body}}</p>
                     <p class='image'>{{$anime->image}}</p>
                     <p class='link'>{{$anime->link}}</p>
@@ -34,14 +33,15 @@
             	</a>
             @endif
             </span>
-            @endforeach
+            
+            カウント{{$accessCounter->count}}
         </div>
     </x-slot>
     
     <x-slot name="sub1">
         <div id="sub1">
         <h1>アニメを探す</h1>
-        <a href='/posts/anime'>roll</a>
+        <a href='/animes/search'>roll</a>
         <h1>アニメ一覧</h1>
         <a href='/posts/anime'>roll</a>
         <h1>アニメ評価一覧</h1>

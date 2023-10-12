@@ -13,7 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('views', function (Blueprint $table) {
+        Schema::create('access_counters', function (Blueprint $table) {
+            $table->id();
+            $table->integer('count')->default(0); 
             $table->foreignId('anime_id')->constrained();
         });
     }
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('views', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('access_counters');
     }
 };

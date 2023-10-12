@@ -17,9 +17,9 @@ class Anime extends Model
     }
     
     // Viewに対するリレーション
-    public function views() 
+    public function accesscounter() 
     {
-        return $this->belongsToMany(View::class);
+        return $this->belongsTo(AccessCOunter::class);
     }
     
     // Categoryに対するリレーション

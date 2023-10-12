@@ -15,6 +15,10 @@
                 </div>
                 @endforeach
             {{$ranking->body}}
+            @if(Auth::id() == $ranking->user_id){
+                <div class="edit"><a href="/posts/{{ $ranking->user->id }}/edit_post">edit</a></div>
+                }
+            @endif
             @endforeach
         </div>
    
@@ -22,7 +26,7 @@
 
         <div id="sub1">
         <h1>アニメを探す</h1>
-        <a href='/posts/anime'>roll</a>
+        <a href='/anime/show'>roll</a>
         <h1>アニメ一覧</h1>
         <a href='/posts/anime'>roll</a>
         <h1>アニメ評価一覧</h1>
@@ -31,6 +35,8 @@
         <a href='/posts/anime_ranking'>rol</a>
         <h1>オススメアニメ投稿</h1>
         <a href='/posts/create'>create</a>
+        <h1>アニメを評価する</h1>
+        <a href='/anime/show'>post</a>
         <h1>口コミ一覧</h1>
         <a href='/posts/comment'>roll2</a>
         <h1>口コミ投稿</h1>
