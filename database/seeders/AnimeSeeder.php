@@ -22,7 +22,6 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2012',
-                'category_id' => '1'
     
         ]);
         
@@ -32,7 +31,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2014',
-                'category_id' => '1'
+           
         ]);
         
         DB::table('animes')->insert([
@@ -41,7 +40,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2018',
-                'category_id' => '1'
+               
         ]);
         
         DB::table('animes')->insert([
@@ -50,7 +49,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2011',
-                'category_id' => '3'
+               
         ]);
         
         DB::table('animes')->insert([
@@ -59,7 +58,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2016',
-                'category_id' => '3'
+               
         ]);
         
         DB::table('animes')->insert([
@@ -68,7 +67,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2014',
-                'category_id' => '3'
+               
         ]);
         
         DB::table('animes')->insert([
@@ -77,7 +76,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2010',
-                'category_id' => '3'
+              
         ]);
         
         DB::table('animes')->insert([
@@ -86,7 +85,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2012',
-                'category_id' => '4'
+              
         ]);
         
         DB::table('animes')->insert([
@@ -95,7 +94,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2018',
-                'category_id' => '5'
+               
         ]);
         
          DB::table('animes')->insert([
@@ -104,7 +103,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2023',
-                'category_id' => '1'
+               
     
         ]);
         
@@ -114,7 +113,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2023',
-                'category_id' => '4'
+               
         ]);
         
         DB::table('animes')->insert([
@@ -123,7 +122,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'リンクをはる',
                 'era' => '2023',
-                'category_id' => '1'
+              
         ]);
         
          DB::table('animes')->insert([
@@ -132,7 +131,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'https://www.marv.jp/special/tokyoghoul/first/index.html',
                 'era' => '2014',
-                'category_id' => '1'
+              
     
         ]);
         
@@ -142,7 +141,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'https://arslan.jp/index2.html',
                 'era' => '2015',
-                'category_id' => '1'
+             
         ]);
         
         DB::table('animes')->insert([
@@ -151,7 +150,7 @@ class AnimeSeeder extends Seeder
                 'image' => '画像データ',
                 'link' => 'https://www.project-magi.com/',
                 'era' => '2012',
-                'category_id' => '1'
+               
         ]);
         
     }

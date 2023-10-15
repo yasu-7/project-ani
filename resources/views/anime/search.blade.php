@@ -17,7 +17,7 @@
         </div>
         </form>
         @for($i = 0; $i < $count; $i++)
-        {{$datas[$i]["title"]}}<br>
+        <a href="/posts/{{ $datas[$i]["id"] }}/anime_view">{{$datas[$i]["title"]}}<br>
         <a href="{{$datas[$i]["wikipedia_url"]}}">wiki</a><br>
         <img src="{{$datas[$i]["images"]["recommended_url"]}}" alt=""><br>
         <a href="/posts/{{ $datas[$i]["id"] }}/anime_rate">アニメ評価<br>

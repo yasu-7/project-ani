@@ -5,7 +5,7 @@
     
     <x-slot name="slot">
         <div class='posts'>
-            <form action="/reason/{{$reason->user_id}}" method="POST">
+            <form action="/posts/{{$reason->user_id}}/update_ranking" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="title">
@@ -27,6 +27,9 @@
                     <h2>Body</h2>
                     <textarea name="reason[body]" placeholder="感想" value="{{ $user->reason->body }}"></textarea>
                 </div>
+                
+                <input type='hidden' name="reason[id]" value="{{$user->reason->id}}" >
+                
               
                 <input type="submit" value="store_pp"/>
              </form>

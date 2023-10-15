@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('ranks', function (Blueprint $table) {
-            $table->foreignId('reason_id')->constrained();
+            $table->foreignId('reason_id')->references('id')->on('reasons')->onDelete('cascade');
         });
     }
 

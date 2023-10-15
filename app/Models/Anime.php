@@ -10,6 +10,7 @@ class Anime extends Model
 {
     use HasFactory;
     
+    public $timestamps = false; // 追加
     // Likeに対するリレーション
     public function likes() 
     {
