@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RankController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ViewController;
 use App\Http\Controllers\AnnictController;
 use App\Http\Controllers\AccessController;
 /*
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/posts/like/{anime}', [LikeController::class, 'like'])->name('like');
     Route::get('/posts/unlike/{anime}', [LikeController::class, 'unlike'])->name('unlike');
+    
+    Route::get('/posts/look/{anime}', [ViewController::class, 'look'])->name('look');
+    Route::get('/posts/unlook/{anime}', [ViewController::class, 'unlook'])->name('unlook');
     
     Route::get('/posts/{anime}/anime_count',[AccessController::class, 'index']);
     

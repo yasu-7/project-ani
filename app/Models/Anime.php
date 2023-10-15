@@ -23,12 +23,6 @@ class Anime extends Model
         return $this->belongsTo(AccessCOunter::class);
     }
     
-    // Categoryに対するリレーション
-    //「1対多」の関係なので単数系に
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
     
     // Postに対するリレーション
     //「1対多」の関係なので単数系に
@@ -53,5 +47,10 @@ class Anime extends Model
     public function is_like()
     {
         return is_null(Like::where('anime_id', $this->id)->where('user_id', Auth::id())->first());
+    }
+    
+    public function is_look()
+    {
+        return is_null(View::where('anime_id', $this->id)->where('user_id', Auth::id())->first());
     }
 }

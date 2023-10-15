@@ -34,6 +34,21 @@
             	</a>
             @endif
             </span>
+            
+            <span>
+             
+            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
+            @if($anime->is_look())
+            <!-- 「いいね」取消用ボタンを表示 -->
+            	<a href="{{ route('look', $anime) }}" class="btn btn-success btn-sm">
+            		未視聴
+            	</a>
+            @else
+            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+            	<a href="{{ route('unlook', $anime) }}" class="btn btn-secondary btn-sm">
+            		視聴済み
+            @endif
+            </span>
             @endforeach
         </div>
     </x-slot>

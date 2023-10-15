@@ -51,7 +51,7 @@ class User extends Authenticatable
     // Viewに対するリレーション
     public function views() 
     {
-        return $this->belongsToMany(View::class);
+        return $this->hasMany(View::class);
     }
     
     // commentに対するリレーション
