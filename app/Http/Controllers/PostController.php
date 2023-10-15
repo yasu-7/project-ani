@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\Anime;
 use App\Models\Comment;
 use App\Models\Reason;
 use App\Models\Rank;
 use App\Models\Like;
+use Cloudinary;
 use App\Models\AccessCounter;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\AnimeRequest;
@@ -64,10 +66,34 @@ class PostController extends Controller
     /*--アニメ詳細画面--*/
     public function anime_view($id)
     {
-        dd($id);
+        $make= Anime::where('id', $id);
+        //animeテーブルにID
+        if ($make->exists() == null){
+        $access_token = config('services.annict.access_token');
+        $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_ids={$id}";
+        $response = Http::get($url);
+        $datas = $response->json($key = null, $default = null)["works"];
+        $count = $response->json($key = null, $default = null)["total_count"];
+        
+        //アニメテーブルにデータを挿入
+        $anime = New Anime();
+        $anime->id = $datas[$count-1]["id"];
+        $anime->name = $datas[$count-1]["title"];
+        $anime->body = $datas[$count-1]["id"];
+        $anime->link = $datas[$count-1]["wikipedia_url"];
+        $anime->image = $datas[$count-1]["images"]["recommended_url"];
+        //urlが正常に挿入できるか判断
+        if ($anime->images == null){
+            $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
+        }
+        $anime->era = $datas[$count-1]["released_on"];
+        $anime->category_id = 1;
+        $anime->save();
+        }
+        
         $anime = Anime::find($id);
+        
         $accessCounter = AccessCounter::where('anime_id', $anime->id);
-      
         if ($accessCounter->exists() == null){
             $accessCounter = New AccessCounter();
             $accessCounter->anime_id = $anime->id;
@@ -96,7 +122,38 @@ class PostController extends Controller
     {
         $input = $request['post'];
         $input += ['user_id' => $request->user()->id];
-        $post->fill($input)->save();
+        $make= Anime::where('id', $input["anime_id"]);
+        
+        //animeテーブルにID
+        if ($make->exists() == null){
+        $access_token = config('services.annict.access_token');
+        $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_ids={$input["anime_id"]}";
+        $response = Http::get($url);
+        $datas = $response->json($key = null, $default = null)["works"];
+        $count = $response->json($key = null, $default = null)["total_count"];
+        
+        //アニメテーブルにデータを挿入
+        $anime = New Anime();
+        $anime->id = $datas[$count-1]["id"];
+        $anime->name = $datas[$count-1]["title"];
+        $anime->body = $datas[$count-1]["id"];
+        $anime->link = $datas[$count-1]["wikipedia_url"];
+        $anime->image = $datas[$count-1]["images"]["recommended_url"];
+        //urlが正常に挿入できるか判断
+        if ($anime->images == null){
+            $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
+        }
+        $anime->era = $datas[$count-1]["released_on"];
+        $anime->save();
+        }
+        //postをテーブルに挿入
+        $post = New Post();
+        $post->anime_id = $input['anime_id'];
+        $post->title = $input["title"];
+        $post->body = $input["body"];
+        $post->rate = $input["rate"];
+        $post->user_id = $input["user_id"];
+        $post->save();
         return redirect('/posts/anime_rate_v');
     }
     
@@ -163,6 +220,35 @@ class PostController extends Controller
         $rank = Rank::where('user_id',$id)->get()->toArray();
         $user = Auth::user();
         return view('posts.edit')->with(['rank' => $rank, 'reason' => $reason, 'user' => $user]);
+    }
+    
+    public function update_ranking(Request $request,Reason $reason, Rank $rank)
+    {
+        $user_id = Auth::id();
+        $user = Auth::user();
+        //dd($user_id);
+        $input_rank = $request['rank'];
+        $input_reason = $request['reason'];
+        $input_reason += ['user_id' => $user_id];
+        $reason_id = $input_reason['id'];
+        DB::table('reasons')->where('user_id',$user_id)->delete();
+        DB::table('ranks')->where('user_id',$user_id)->delete();
+        
+        $reason->fill($input_reason)->save();
+        //dd($reason);
+        $reason_id = $user->reason->id;
+        
+        foreach(array_map(null,$input_rank['number'], $input_rank['title']) as [$number,$title])
+        {
+            $rank = new Rank();
+            $rank->number = $number;
+            $rank->title = $title;
+            $rank->user_id = $user_id;
+            $rank->reason_id = $reason_id;
+            $rank->save();
+        }
+        
+        return redirect('/');
     }
     
     public function delete(Comment $comment)

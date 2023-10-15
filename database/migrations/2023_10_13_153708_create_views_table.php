@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('animes', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained(); 
+        Schema::create('views', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('anime_id')->constrained();
+            $table->foreignId('user_id')->constrained();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('animes', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('views');
     }
 };
