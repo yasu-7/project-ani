@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/anime_rate_v', [PostController::class, 'show_post']);
     Route::get('/anime/show',[AnnictController::class, 'show_annict']);
     Route::get('/anime/search',[AnnictController::class, 'search_annict']);
+    Route::get('/posts/user', [PostController::class, 'profile']);
     
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{comment}', [PostController::class, 'update']);

@@ -15,7 +15,6 @@ use App\Models\AccessCounter;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\AnimeRequest;
 use App\Http\Requests\CommentpRequest;
-use App\Http\Requests\RankRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -51,10 +50,18 @@ class PostController extends Controller
         return view('posts.anime_rate_v')->with(['posts' => $post->getByLimit()]);
     }
     
-    /*--アニメ投稿--*/
-    public function create()
+    /*--ランキングアニメ投稿--*/
+    public function create(Reason $reason)
     {
-        return view('posts.create');
+        //dd(empty(Auth::user()->reason));
+        if (empty(Auth::user()->reason)){
+            return view('posts.create');
+        }else{
+            $user = Auth::user();
+            $reason = Reason::where('user_id',$user->id)->first();
+            $rank = Rank::where('user_id',$user->id)->get()->toArray();
+            return view('posts.edit')->with(['rank' => $rank, 'reason' => $reason, 'user' => $user]);
+        }
     }
     
     /*--口コミ投稿--*/
@@ -226,7 +233,6 @@ class PostController extends Controller
     {
         $user_id = Auth::id();
         $user = Auth::user();
-        //dd($user_id);
         $input_rank = $request['rank'];
         $input_reason = $request['reason'];
         $input_reason += ['user_id' => $user_id];
@@ -235,7 +241,6 @@ class PostController extends Controller
         DB::table('ranks')->where('user_id',$user_id)->delete();
         
         $reason->fill($input_reason)->save();
-        //dd($reason);
         $reason_id = $user->reason->id;
         
         foreach(array_map(null,$input_rank['number'], $input_rank['title']) as [$number,$title])
