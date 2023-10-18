@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Reason;
 use App\Models\Rank;
 use App\Models\Like;
+use App\Models\View;
 use Cloudinary;
 use App\Models\AccessCounter;
 use App\Http\Requests\PostRequest;
@@ -32,10 +33,15 @@ class PostController extends Controller
     /*-- アニメ一覧の表示--*/
     public function show(Anime $anime)
     {
-        $like=Like::where('user_id', Auth::id())->first();
+        $user_id = Auth::id();
+        $not_view = View::where('user_id',$user_id)->pluck('anime_id')->toArray();
+        $not_view = array_map('intval', $not_view);
         
+        $like=Like::where('user_id', $user_id)->first();
+        //dd(gettype([0]));
         $animes = $anime->get();
-        return view('posts.anime', compact('animes', 'like'));
+        //dd(gettype($animes[0]->id));
+        return view('posts.anime', compact('animes', 'like', 'not_view'));
     }
     
     /*-- 口コミの表示--*/
@@ -44,10 +50,10 @@ class PostController extends Controller
         return view('posts.comment')->with(['comments' => $comment->getByLimit()]);
     }
     
-    /*-- アニメ一覧の表示--*/
+    /*-- アニメ評価の表示--*/
     public function show_post(Post $post)
     {
-        return view('posts.anime_rate_v')->with(['posts' => $post->getByLimit()]);
+        return view('posts.anime_rate_v')->with(['posts' => $post]);
     }
     
     /*--ランキングアニメ投稿--*/
@@ -87,14 +93,14 @@ class PostController extends Controller
         $anime->id = $datas[$count-1]["id"];
         $anime->name = $datas[$count-1]["title"];
         $anime->body = $datas[$count-1]["id"];
-        $anime->link = $datas[$count-1]["wikipedia_url"];
+        $anime->link = $datas[$count-1]["official_site_url"];
         $anime->image = $datas[$count-1]["images"]["recommended_url"];
         //urlが正常に挿入できるか判断
-        if ($anime->images == null){
-            $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
+        
+        if ( $datas[$count-1]["images"]["recommended_url"] == null){
+                $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
         }
         $anime->era = $datas[$count-1]["released_on"];
-        $anime->category_id = 1;
         $anime->save();
         }
         
@@ -139,17 +145,19 @@ class PostController extends Controller
         $datas = $response->json($key = null, $default = null)["works"];
         $count = $response->json($key = null, $default = null)["total_count"];
         
+         //dd($datas);
         //アニメテーブルにデータを挿入
         $anime = New Anime();
         $anime->id = $datas[$count-1]["id"];
         $anime->name = $datas[$count-1]["title"];
         $anime->body = $datas[$count-1]["id"];
-        $anime->link = $datas[$count-1]["wikipedia_url"];
+        $anime->link = $datas[$count-1]["official_site_url"];
         $anime->image = $datas[$count-1]["images"]["recommended_url"];
         //urlが正常に挿入できるか判断
-        if ($anime->images == null){
-            $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
+        if ( $datas[$count-1]["images"]["recommended_url"] == null){
+                        $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
         }
+        //dd($anime->image);
         $anime->era = $datas[$count-1]["released_on"];
         $anime->save();
         }
@@ -161,7 +169,7 @@ class PostController extends Controller
         $post->rate = $input["rate"];
         $post->user_id = $input["user_id"];
         $post->save();
-        return redirect('/posts/anime_rate_v');
+        return redirect('/posts/anime_rate/list');
     }
     
      /*--アニメranking投稿--*/
@@ -212,6 +220,26 @@ class PostController extends Controller
         return view('posts.anime_rate')->with(['datas' => $datas,'post' => $post,"count" => $count]);
     }
     
+    /*--評価投稿の編集画面--*/
+    public function edit_rate($id)
+    {
+        $anime_rate = Post::where('id',$id)->first();
+        return view('posts.anime_rate_edit')->with(['post' => $anime_rate]);
+    }
+    
+    /*--評価投稿の編集--*/
+    public function update_rate(Request $request, Post $post)
+    {
+        $user_id = Auth::id();
+        $input_post = $request['post'];
+        $input_post += ['user_id' => $user_id];
+        $post->fill($input_post)->save();
+        
+
+    return redirect('/posts/anime_rate/list');
+    }
+    
+    /*--コメントの編集--*/
     public function update(PostRequest $request, Comment $comment)
     {
     $input_comment = $request['comment'];
@@ -261,6 +289,18 @@ class PostController extends Controller
         $comment->delete();
         return redirect('/');
     }
+    
+    /*-- ユーザー情報の表示--*/
+    public function  profile(Post $post)
+    {
+        $user = Auth::user();
+        $post = Post::where('user_id',$user->id)->get();
+        $like = Like::where('user_id',$user->id)->get();
+        $comment = Comment::where('user_id',$user->id)->get();
+        $look = View::where('user_id',$user->id)->get();
+        //$anime = Anime::where('id',$like->anime_id)->get();
+        return view('/posts/user')->with(['users' => $user, 'posts' => $post, 'like' => $like, 'comment' => $comment, 'look' => $look]);
+    }
+    
 
 }
-

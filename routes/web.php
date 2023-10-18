@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/anime', [PostController::class, 'show']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
     Route::get('/posts/anime_ranking', [RankController::class, 'ranking']);
-    Route::get('/posts/anime_rate_v', [PostController::class, 'show_post']);
+    Route::get('/posts/anime_rate/list', [PostController::class, 'show_post']);
     Route::get('/anime/show',[AnnictController::class, 'show_annict']);
     Route::get('/anime/search',[AnnictController::class, 'search_annict']);
     Route::get('/posts/user', [PostController::class, 'profile']);
@@ -53,6 +53,10 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/posts/{id}/edit_post', [PostController::class, 'edit_ranking']);
     Route::put('/posts/{id}/update_ranking', [PostController::class, 'update_ranking']);
+    Route::delete('/posts/{id}', [PostController::class,'delete_post']);
+    
+    Route::get('/posts/{id}/anime_rate_edit', [PostController::class, 'edit_rate']);
+    Route::put('/posts/{id}/update_rate', [PostController::class, 'update_rate']);
     Route::delete('/posts/{id}', [PostController::class,'delete_post']);
     
     Route::get('/posts/like/{anime}', [LikeController::class, 'like'])->name('like');

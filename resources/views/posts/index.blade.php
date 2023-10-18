@@ -40,6 +40,8 @@
         <a href='/posts/comment'>roll2</a>
         <h1>口コミ投稿</h1>
         <a href='/posts/comment_create'>create_c</a>
+        <h1>プロフィール情報</h1>
+        <a href='/posts/user'>プロフィール</a>
         </div>
 
     

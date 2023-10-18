@@ -5,47 +5,12 @@
     
     <x-slot name="slot">
         <div class='animes'>
-            @foreach ($users as $user)
-                <div class='anime'>
-                    <p class='body'>{{$user->anime->title}}</p>
-                </div>
-            <span>
-             
-            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
-            @if($anime->is_like())
-            <!-- 「いいね」取消用ボタンを表示 -->
-            	<a href="{{ route('like', $anime) }}" class="btn btn-success btn-sm">
-            		いいねする
-            		<!-- 「いいね」の数を表示 -->
-            		{{$anime->likes->count()}}
-            		
-            	</a>
-            @else
-            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-            	<a href="{{ route('unlike', $anime) }}" class="btn btn-secondary btn-sm">
-            		いいね解除
-            		<!-- 「いいね」の数を表示 -->
-            		{{$anime->likes->count()}}
-            	</a>
-            @endif
-            </span>
-            
-            <span>
-             
-            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
-            @if($anime->is_look())
-            <!-- 「いいね」取消用ボタンを表示 -->
-            	<a href="{{ route('look', $anime) }}" class="btn btn-success btn-sm">
-            		未視聴
-            	</a>
-            @else
-            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-            	<a href="{{ route('unlook', $anime) }}" class="btn btn-secondary btn-sm">
-            		視聴済み
-            @endif
-            </span>
-            @endforeach
+            <p class='name'>{{$users->name}}</p>
+            お気に入り数{{$like->count()}}<br>
+            視聴アニメ数{{$look->count()}}<br>
+            コメント数{{$comment->count()}}<br>
         </div>
+        
     </x-slot>
     
     <x-slot name="sub1">

@@ -14,6 +14,12 @@ class AnnictController extends Controller
     
     public function search_annict(Request $request)
     {
+        //dd($request);
+        //dd($request->input('title'));
+        if ($request->input('title') == null){
+            $count = 0;
+             return view("anime.search")->with(["count" => $count]);
+        }else{
         $title=$request->input('title');
         $access_token = config('services.annict.access_token');
         $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_title={$title}";
@@ -21,6 +27,7 @@ class AnnictController extends Controller
         $datas = $response->json($key = null, $default = null)["works"];
         $count = $response->json($key = null, $default = null)["total_count"];
         return view("anime.search")->with(["datas"=> $datas, "count" => $count]);
+        }
     }
     
 }

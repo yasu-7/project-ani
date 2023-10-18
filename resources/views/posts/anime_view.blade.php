@@ -8,8 +8,8 @@
                 <div class='anime'>
                     <p class='name'>{{$anime->name}}</p>
                     <p class='body'>{{$anime->body}}</p>
-                    <p class='image'>{{$anime->image}}</p>
-                    <p class='link'>{{$anime->link}}</p>
+                    <img src="{{$anime->image}}" alt=""><br>
+                    <a href="{{$anime->link}}">公式サイト</a><br>
                     <p class='era'>{{$anime->era}}</p>
                     <div class="rate"><a href="/posts/{{ $anime->id }}/anime_rate">アニメ評価</a></div>
                 </div>

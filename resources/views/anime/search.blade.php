@@ -16,12 +16,17 @@
             </button>
         </div>
         </form>
+        @if($count == 0)
+        検索結果は0件でした。
+        @else
+        検索結果は{{$count}}件でした。<br>
         @for($i = 0; $i < $count; $i++)
         <a href="/posts/{{ $datas[$i]["id"] }}/anime_view">{{$datas[$i]["title"]}}<br>
         <a href="{{$datas[$i]["wikipedia_url"]}}">wiki</a><br>
         <img src="{{$datas[$i]["images"]["recommended_url"]}}" alt=""><br>
         <a href="/posts/{{ $datas[$i]["id"] }}/anime_rate">アニメ評価<br>
         @endfor
+        @endif
     </x-slot>
     
     <x-slot name="sub1">
