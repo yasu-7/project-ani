@@ -13,23 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class RankController extends Controller
 {
-    public function  rank_view(Anime $anime, Commentp $commentp)
-    {
-        $user_id = Auth::id();
-        
-        $ranks_data = Rank::where('user_id', $user_id)->get()->sortBy('rank');
-        return view('posts.index')->with([
-            'ranks_data' => $ranks_data, 'commentps' => $commentp->getByLimit()
-            ]);
-    }
-    
-    public function  post_view(Commentp $commentp, Rank $rank)
-    {
-        
-        $rankings = $commentp->orderBy('updated_at', 'DESC')->get();
-        
-        return view('posts.view_post')->with([ 'rankings' => $rankings]);
-    }
     
     public function  ranking(Post $post, Anime $anime)
     {

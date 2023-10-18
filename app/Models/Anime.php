@@ -17,6 +17,10 @@ class Anime extends Model
         return $this->hasMany(Like::class);
     }
     
+    public function views() 
+    {
+        return $this->hasMany(View::class);
+    }
     // Viewに対するリレーション
     public function accesscounter() 
     {

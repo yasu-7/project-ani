@@ -1,20 +1,24 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1>口コミ投稿編集</h1>
+        <h1>プロフィール</h1>
     </x-slot>
     
     <x-slot name="slot">
-        <div class="content">
-            <form action="/posts/{{ $comment->id }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class='content__body'>
-                    <h2>本文</h2>
-                    <input type='text' name='comment[body]' value="{{ $comment->body }}">
-                </div>
-                <input type="submit" value="store">
-            </form>
-        </div>
+        <div class="like"><a href="/users/{{ $users->id }}/list/like">お気に入り一覧</a></div>
+        <div class="view"><a href="/users/{{ $users->id }}/list/view">視聴一覧</a></div>
+        <div class="rate"><a href="/users/{{ $users->id }}/list/rate">評価一覧</a></div>
+        <div class="comment"><a href="/users/{{ $users->id }}/list/comment">コメント一覧</a></div>
+        <h1>アニメ評価一覧</h1>
+        @foreach ($posts as $post)
+            <div class='posts'>
+                <div class="title"><a href="/posts/{{ $post->anime_id }}/anime_view">{{$post->title}}</a></div>
+                <div class="body">{{$post->body}}</div>
+                <div class="rate">{{$post->rate}}</div>
+            </div>
+            @if(Auth::id() == $post->user_id)
+                <div class="edit"><a href="/posts/{{ $post->id }}/anime_rate_edit">edit</a></div>
+            @endif
+        @endforeach
     </x-slot>
     
     <x-slot name="sub1">
@@ -40,7 +44,7 @@
         <h1>
             <a href='/posts/comment'>口コミ一覧</a>
         </h1>
-        <h1>
+        <h1>口コミ投稿</h1>
             <a href='/posts/comment_create'>口コミ投稿</a>
         </h1>
         <h1>
@@ -55,4 +59,5 @@
         <h1>新規の口コミ</h1>
         </div>
     </x-slot>
-</x-app-layout>
+    
+ </x-app-layout> 

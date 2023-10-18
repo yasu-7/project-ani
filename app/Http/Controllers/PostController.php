@@ -15,7 +15,6 @@ use Cloudinary;
 use App\Models\AccessCounter;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\AnimeRequest;
-use App\Http\Requests\CommentpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -53,7 +52,7 @@ class PostController extends Controller
     /*-- アニメ評価の表示--*/
     public function show_post(Post $post)
     {
-        return view('posts.anime_rate_v')->with(['posts' => $post]);
+        return view('posts.anime_rate_v')->with(['posts' => $post->get()]);
     }
     
     /*--ランキングアニメ投稿--*/
@@ -71,7 +70,7 @@ class PostController extends Controller
     }
     
     /*--口コミ投稿--*/
-    public function create_c()
+    public function create_comment()
     {
     return view('posts.comment_create');
     }
@@ -106,6 +105,8 @@ class PostController extends Controller
         
         $anime = Anime::find($id);
         
+        $post = Post::where('anime_id',$id)->get();
+        
         $accessCounter = AccessCounter::where('anime_id', $anime->id);
         if ($accessCounter->exists() == null){
             $accessCounter = New AccessCounter();
@@ -118,7 +119,7 @@ class PostController extends Controller
             $accessCounter->count += 1;
             $accessCounter->save();
         }
-        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter]);
+        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post]);
     }
     
     /*--口コミ作成用--*/
@@ -211,6 +212,11 @@ class PostController extends Controller
     /*--評価投稿--*/
     public function rate($id,Post $post)
     {
+        $user_id = Auth::id();
+        $not_post = Post::where('user_id',$user_id)->pluck('anime_id')->toArray();
+        $not_post = array_map('intval', $not_post);
+        
+        if(!in_array($id,$not_post)){
         $access_token = config('services.annict.access_token');
         $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_ids={$id}";
         $response = Http::get($url);
@@ -218,6 +224,10 @@ class PostController extends Controller
         $count = $response->json($key = null, $default = null)["total_count"];
         
         return view('posts.anime_rate')->with(['datas' => $datas,'post' => $post,"count" => $count]);
+        }else{
+            $anime_rate = Post::where('id',$id)->first();
+            return view('posts.anime_rate_edit')->with(['post' => $anime_rate]);
+        }
     }
     
     /*--評価投稿の編集画面--*/
@@ -291,15 +301,51 @@ class PostController extends Controller
     }
     
     /*-- ユーザー情報の表示--*/
-    public function  profile(Post $post)
+    public function  profile($id,Post $post,Anime $anime)
     {
         $user = Auth::user();
-        $post = Post::where('user_id',$user->id)->get();
-        $like = Like::where('user_id',$user->id)->get();
-        $comment = Comment::where('user_id',$user->id)->get();
-        $look = View::where('user_id',$user->id)->get();
-        //$anime = Anime::where('id',$like->anime_id)->get();
-        return view('/posts/user')->with(['users' => $user, 'posts' => $post, 'like' => $like, 'comment' => $comment, 'look' => $look]);
+        $post = Post::where('user_id',$id)->get();
+        $like = Like::where('user_id',$id)->get();
+        $comment = Comment::where('user_id',$id)->get();
+        $look = View::where('user_id',$id)->get();
+        $animes = $anime->get();
+        $like_anime = View::where('user_id',$id)->pluck('anime_id')->toArray();
+        $like_anime = array_map('intval', $like_anime);
+        
+        $rankings = Reason::where('user_id',$id)->get();
+        return view('/users/profile')->with(['users' => $user, 'posts' => $post, 'like' => $like, 'comment' => $comment, 'look' => $look, 'rankings' => $rankings]);
+    }
+    
+    public function  like_list($id,Post $post,Anime $anime)
+    {
+        $user = Auth::user();
+        $animes = $anime->get();
+        $like_anime = Like::where('user_id',$id)->pluck('anime_id')->toArray();
+        $like_anime = array_map('intval', $like_anime);
+        return view('/users/like_list')->with(['users' => $user,'animes' => $animes,'like_anime' => $like_anime]);
+    }
+    
+    public function  view_list($id,Post $post,Anime $anime)
+    {
+        $user = Auth::user();
+        $animes = $anime->get();
+        $view_anime = View::where('user_id',$id)->pluck('anime_id')->toArray();
+        $view_anime = array_map('intval', $view_anime);
+        return view('/users/view_list')->with(['users' => $user, 'animes' => $animes,'view_anime' => $view_anime]);
+    }
+    
+    public function  rate_list($id,Post $post)
+    {
+        $user = Auth::user();
+        $post = Post::where('user_id',$id)->get();
+        return view('/users/rate_list')->with(['users' => $user,'posts' => $post]);
+    }
+    
+    public function  comment_list($id)
+    {
+        $user = Auth::user();
+        $comment = Comment::where('user_id',$id)->get();
+        return view('/users/comment_list')->with(['users' => $user, 'comments' => $comment]);
     }
     
 
