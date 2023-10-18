@@ -13,6 +13,9 @@
                     <p class='body'>感想：{{$post->body}}</p>
                     <p class='rate'>アニメ評価：{{$post->rate}}</p>
                 </div>
+            @if(Auth::id() == $post->user_id)
+                <div class="edit"><a href="/posts/{{ $post->id }}/anime_rate_edit">edit</a></div>
+            @endif
             @endforeach
         </div>
     </x-slot>
