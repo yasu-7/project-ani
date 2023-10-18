@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     //Route::get('/', [PostController::class, 'index']);
     Route::get('/posts/create', [PostController::class, 'create']);
-    Route::get('/posts/comment_create', [PostController::class, 'create_c']);
+    Route::get('/posts/comment_create', [PostController::class, 'create_comment']);
     
     Route::get('/posts/{id}/anime_rate', [PostController::class, 'rate']);
     Route::get('/posts/{anime}/anime_view', [PostController::class, 'anime_view']);
@@ -45,7 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/anime_rate/list', [PostController::class, 'show_post']);
     Route::get('/anime/show',[AnnictController::class, 'show_annict']);
     Route::get('/anime/search',[AnnictController::class, 'search_annict']);
-    Route::get('/posts/user', [PostController::class, 'profile']);
+    
+    
+    Route::get('/users/{id}', [PostController::class, 'profile']);
+    Route::get('/users/{id}/list/view', [PostController::class, 'view_list']);
+    Route::get('/users/{id}/list/like', [PostController::class, 'like_list']);
+    Route::get('/users/{id}/list/rate', [PostController::class, 'rate_list']);
+    Route::get('/users/{id}/list/comment', [PostController::class, 'comment_list']);
     
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{comment}', [PostController::class, 'update']);

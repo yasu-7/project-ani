@@ -1,6 +1,21 @@
-
-        <h1>アニメ投稿一覧</h1>
-   
+<x-app-layout>
+    <x-slot name="header">
+        <h1>プロフィール</h1>
+    </x-slot>
+    
+    <x-slot name="slot">
+        <div class='count'>
+            <p class='name'>{{$users->name}}</p>
+            お気に入り数：{{$like->count()}}<br>
+            視聴アニメ数：{{$look->count()}}<br>
+            評価数：{{$posts->count()}}<br>
+            コメント数：{{$comment->count()}}<br>
+        </div>
+        <div class="like"><a href="/users/{{ $users->id }}/list/like">お気に入り一覧</a></div>
+        <div class="view"><a href="/users/{{ $users->id }}/list/view">視聴一覧</a></div>
+        <div class="rate"><a href="/users/{{ $users->id }}/list/rate">評価一覧</a></div>
+        <div class="comment"><a href="/users/{{ $users->id }}/list/comment">コメント一覧</a></div>
+        <h1>お気に入り一覧</h1>
         <div class='ranking'>
             @foreach ( $rankings as $ranking)
             <p>ユーザー名：{{$ranking->user->name}}</p>
@@ -18,9 +33,9 @@
             @endif
             @endforeach
         </div>
-   
+    </x-slot>
     
-
+    <x-slot name="sub1">
         <div id="sub1">
         <h1>
             <a href='/anime/show'>アニメを探す</a>
@@ -43,18 +58,20 @@
         <h1>
             <a href='/posts/comment'>口コミ一覧</a>
         </h1>
-        <h1>
+        <h1>口コミ投稿</h1>
             <a href='/posts/comment_create'>口コミ投稿</a>
         </h1>
         <h1>
             <a href='/users/{{Auth::id()}}'>プロフィール</a>
         </h1>
-        </div>
-
+    </div>
+    </x-slot>
     
+    <x-slot name="sub2">
         <div id="sub2">
         <h1>今期のアニメ一覧</h1>
         <h1>新規の口コミ</h1>
-        <a href='/posts/comment'>roll2</a>
         </div>
-  
+    </x-slot>
+    
+ </x-app-layout> 
