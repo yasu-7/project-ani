@@ -37,9 +37,7 @@ class PostController extends Controller
         $not_view = array_map('intval', $not_view);
         
         $like=Like::where('user_id', $user_id)->first();
-        //dd(gettype([0]));
         $animes = $anime->get();
-        //dd(gettype($animes[0]->id));
         return view('posts.anime', compact('animes', 'like', 'not_view'));
     }
     
@@ -131,7 +129,7 @@ class PostController extends Controller
         return redirect('/posts/comment');
     }
     
-    /*--アニメ作成用--*/
+    /*--アニメ評価投稿--*/
     public function rate_post(Post $post, Request $request, Anime $anime) // 引数をRequestからPostRequestにする
     {
         $input = $request['post'];
@@ -225,7 +223,7 @@ class PostController extends Controller
         
         return view('posts.anime_rate')->with(['datas' => $datas,'post' => $post,"count" => $count]);
         }else{
-            $anime_rate = Post::where('id',$id)->first();
+            $anime_rate = Post::where('anime_id',$id)->first();
             return view('posts.anime_rate_edit')->with(['post' => $anime_rate]);
         }
     }

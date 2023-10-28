@@ -1,0 +1,17 @@
+.yws_star{
+	position:relative;
+	font-size:100px;
+	line-height:1em;
+	letter-spacing:-.2em;
+	color:#ccc;
+	margin:0;
+	padding:0;
+}
+.yws_star:before{
+	content:"★★★★★";
+	position:absolute;
+	color:#f60;
+	width:calc( 3.5em - .2 * ( 3.5em - .5em ) );
+	overflow:hidden;
+	white-space:nowrap;
+}

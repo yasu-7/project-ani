@@ -7,11 +7,11 @@
         <form action="/anime/search"　method="GET">
         <div class="flex justify-center">
             <div class="w-80">
-        　      <span class="font-semibold text-xl text-yellow-400">キーワード:</span><input class="bg-yellow-400 text-violet-700" type="search" name="title" placeholder="検索ワード">
+        　      <span class="font-semibold text-xl text-yellow-400">キーワード:</span><input class="text-gray-600" type="search" name="title" placeholder="検索ワード">
             </div>
         </div></br>
         <div class="text-center">
-            <button class="bg-yellow-400 font-medium text-violet-500 py-2 px-4 rounded hover:text-violet-700 hover:bg-yellow-200 ">
+            <button class="bg-yellow-400 font-medium text-violet-500 py-2 px-4 rounded ">
                 <input class="" type="submit" value="Search">
             </button>
         </div>

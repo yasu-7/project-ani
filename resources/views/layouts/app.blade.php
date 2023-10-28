@@ -12,7 +12,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/star.css'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -26,18 +27,24 @@
                     </div>
                 </header>
             @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-            @if (isset($sub1))
-                {{ $sub1 }}
-            @endif
             
+            <div class = "flex">
+            
+            @if (isset($sub1))
+                <div class = "flex-none w-72 max-h-max">{{ $sub1 }}</div>
+            @endif
+            <!-- Page Content -->
+            <div class = "flex-none w-7/12 max-h-max bg-white">
+                <main>
+                        {{ $slot }}
+                </main>
+             </div>
+             
             @if (isset($sub2))
                 {{ $sub2 }}
             @endif
+            
+            </div>
         </div>
     </body>
 </html>
