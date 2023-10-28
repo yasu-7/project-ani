@@ -37,7 +37,7 @@
                 <input type="submit" value="store_p"/>
              </form>
             <div class="back">
-                 [<a href="/">戻る</a>]
+                 <a href="/posts/anime">戻る</a>
             </div>
     </x-slot>
     
