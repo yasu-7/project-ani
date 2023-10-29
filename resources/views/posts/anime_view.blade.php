@@ -4,50 +4,104 @@
     </x-slot>
     
     <x-slot name="slot">
-        <div class='animes'>
-                <div class='anime'>
-                    <p class='name'>{{$anime->name}}</p>
-                    <img src="{{$anime->image}}" alt=""><br>
-                    <a href="{{$anime->link}}">公式サイト</a><br>
-                    <p class='era'>{{$anime->era}}</p>
-                    <div class="rate"><a href="/posts/{{ $anime->id }}/anime_rate">アニメ評価</a></div>
+        <div class="bg-white lg:pb-12">
+            <div class="mx-auto max-w-screen-2xl px-4 md:px-8 p-4">
+            <!-- menu - start -->
+            <div class=" rounded-lg border bg-gray-50 shadow-sm lg:block">
+              <h2><div class="text-3xl text-center mb-1 font-semibold p-4">{{$anime->name}}</h2>
+              <div class="mx-auto flex max-w-screen-lg items-center gap-8 p-4">
+                <!-- promo - start -->
+                <div class="w-1/3 overflow-hidden rounded-lg border">
+                  <div class="h-48 bg-gray-100">
+                    <img src="{{$anime->image}}"  class="h-full w-full object-cover object-center" />
+                  </div>
+        
+                  <div class="flex items-center justify-between gap-2 bg-white p-3">
+                    <p class="text-sm text-gray-500"> <a href="{{$anime->link}}">公式サイト</a></p>
+        
+        
+                  </div>
                 </div>
-                <div class="rate">
-                <p class='name'>{{$anime->posts->count()}}</p>
-                <p class='body'>{{$anime->likes->count()}}</p>
-                <p class='name'>{{$anime->views->count()}}</p>
-                カウント{{$accessCounter->count}}
+                <!-- promo - end -->
+                <div class="grid w-2/3 grid-cols-2 gap-8">
+                    <div>
+                      <div class="mb-1 font-semibold">アニメ評価</div>
+                        <div class="items-center">
+                            <div class="flex">
+                                @for($i=0; $i < floor($rating); $i++)
+                                    <div class="flex-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                              　　            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            　　        　</svg>
+                                    </div>
+                                 @endfor
+                                @if(  $rating - floor($rating) !== 0.0000)
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 transform scale-x-[-1]" viewBox="0 0 20 20" fill="currentColor">
+                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8" />
+                                    </svg>
+                            　  @endif
+                            </div>
+                            <span class="block text-sm text-gray-500">Bases on {{$anime->posts->count()}} reviews</span>
+                        </div>
+                    </div>
+                    <div>
+                      <div class="mb-1 font-semibold">rating</div>
+                      <p class="text-2xl text-left text-gray-500">{{$rating}}</p>
+                    </div>
+                    <div>
+                      <div class="mb-1 font-semibold">いいね数</div>
+                      <p class="text-2xl text-left text-gray-500">{{$anime->likes->count()}}</p>
+                    </div>
+                    <div>
+                      <div class="mb-1 font-semibold">アクセス数</div>
+                      <p class="text-2xl text-left text-gray-500">{{$accessCounter->count}}</p>
+                    </div>
                 </div>
-            <span>
-            <!-- もし$niceがあれば＝ユーザーが「いいね」をしていたら -->
-            @if($anime->is_like())
-            <!-- 「いいね」取消用ボタンを表示 -->
-            	<a href="{{ route('like', $anime) }}" class="btn btn-success btn-sm">
-            		いいねする
-            		<!-- 「いいね」の数を表示 -->
-            		{{$anime->likes->count()}}
-            		
-            	</a>
-            @else
-            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-            	<a href="{{ route('unlike', $anime) }}" class="btn btn-secondary btn-sm">
-            		いいね解除
-            		<!-- 「いいね」の数を表示 -->
-            		{{$anime->likes->count()}}
-            	</a>
-            @endif
-            </span>
-            <h1>アニメ評価一覧</h1>
+              </div>
+              
+            </div>
+            <!-- menu - end -->
+          </div>
+        </div>
+            <div class="mx-auto max-w-screen-md px-4 md:px-8">
+            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl xl:mb-12">アニメ評価一覧</h2>
+    
+            <div class="divide-y rounded">
             @foreach ($posts as $post)
-                <div class='posts'>
-                    <div class="title"><a href="/posts/{{ $post->anime_id }}/anime_view">{{$post->title}}</a></div>
-                    <div class="body">{{$post->body}}</div>
-                    <div class="rate">{{$post->rate}}</div>
+                <!-- review - start -->
+                <div class="flex flex-col gap-3 py-4 md:py-8 border-t-2 border-b-2">
+                    <div>
+                        <span class="block text-sm font-bold">{{$post->anime->name}}</span>
+                        <span class="block text-sm font-bold">{{$post->user->name}}</span>
+                        <span class="block text-sm text-gray-500"><p class='time'>{{$post->created_at}}</p></span>
+                    </div>
+    
+                <!-- stars - start -->
+                    <div class="flex">
+                        @for($i=0; $i < $post->rate; $i++)
+                            <div class="flex-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                        　　          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      　　      　</svg>
+                            </div>
+                        @endfor 
+                        <p calss="text-2xl">アニメ評価：{{$post->rate}}</p>
+                        <!-- stars - end -->
+                    </div>
+                    <p class="text-gray-600">{{$post->body}}</p>
+                    @if(Auth::id() == $post->user_id)
+                        <div class="edit">
+                            <a href="/posts/{{ $post->id }}/anime_rate_edit">
+                                <span class="rounded border px-2 py-1 text-sm text-gray-500">
+                                    edit
+                                </span>
+                            </a>
+                        </div>
+                    @endif
                 </div>
-                @if(Auth::id() == $post->user_id)
-                    <div class="edit"><a href="/posts/{{ $post->id }}/anime_rate_edit">edit</a></div>
-                @endif
             @endforeach
+            </div>
+        </div>
         </div>
     </x-slot>
     
@@ -81,13 +135,6 @@
             <a href='/users/{{Auth::id()}}'>プロフィール</a>
         </h1>
     </div>
-    </x-slot>
-    
-    <x-slot name="sub2">
-        <div id="sub2">
-        <h1>今期のアニメ一覧</h1>
-        <h1>新規の口コミ</h1>
-        </div>
     </x-slot>
     
  </x-app-layout> 

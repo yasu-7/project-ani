@@ -18,7 +18,6 @@ class RankController extends Controller
     {
         
         $ratings = Post::select('anime_id')->selectRaw('AVG(rate) as rate')->groupby('anime_id')->orderBy('rate', 'desc')->get();
-        
         return view('posts.anime_ranking')->with([ 'ratings' => $ratings]);
     }
 }

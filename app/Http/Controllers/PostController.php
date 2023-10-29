@@ -117,7 +117,16 @@ class PostController extends Controller
             $accessCounter->count += 1;
             $accessCounter->save();
         }
-        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post]);
+        
+        $ratings = Post::select('anime_id')->selectRaw('AVG(rate) as rate')->groupby('anime_id')->orderBy('rate', 'desc')->get();
+        
+        $count = $ratings->count();
+        for($i=0; $i < $count; $i++){
+            if($ratings[$i]["anime_id"] == $anime->id)
+            $rating = $ratings[$i]["rate"];
+        }
+        
+        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating]);
     }
     
     /*--口コミ作成用--*/
