@@ -117,16 +117,36 @@ class PostController extends Controller
             $accessCounter->count += 1;
             $accessCounter->save();
         }
-        
+        //アニメの評価平均の計算
         $ratings = Post::select('anime_id')->selectRaw('AVG(rate) as rate')->groupby('anime_id')->orderBy('rate', 'desc')->get();
         
+        //アニメ評価を取り出す
         $count = $ratings->count();
         for($i=0; $i < $count; $i++){
             if($ratings[$i]["anime_id"] == $anime->id)
             $rating = $ratings[$i]["rate"];
         }
         
-        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating]);
+        //評価を配列でとりだす
+        $count_rate = Post::where('anime_id',$id)->pluck('rate')->toArray();
+        $count_rate = array_map('intval', $count_rate);
+        //dd($count_rate);
+  
+        
+        for($i=0;$i < count($count_rate);$i++){
+            for($j=0;$j < 5;$j++){
+                $percent[$j] = 0;
+                if($count_rate[$i] == $j + 1){
+                    dd($percent[$j]);
+                }
+            }
+        }
+        dd($percent);
+        
+        
+        
+        
+        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating, 'count' =>$count_num, 'rate' => $count_list]);
     }
     
     /*--口コミ作成用--*/
