@@ -12,10 +12,24 @@
                 @foreach ($posts as $post)
                     <!-- review - start -->
                     <div class="flex flex-col gap-3 py-4 md:py-8 border-t-2 border-b-2">
-                        <div>
-                            <span class="block text-sm font-bold">{{$post->anime->name}}</span>
-                            <span class="block text-sm font-bold">{{$post->user->name}}</span>
-                            <span class="block text-sm text-gray-500"><p class='time'>{{$post->created_at}}</p></span>
+                        <div class="mt-auto flex items-end justify-between">
+                            <div>
+                                <span class="block text-sm font-bold">{{$post->anime->name}}</span>
+                                <span class="block text-sm font-bold">{{$post->user->name}}</span>
+                                <span class="block text-sm text-gray-500"><p class='time'>{{$post->created_at}}</p></span>
+                            </div>
+                            <div>
+                                @if(Auth::id() == $post->user_id)
+                                    <div class="edit">
+                                        <a href="/posts/{{ $post->id }}/anime_rate_edit">
+                                            <span class="rounded border px-3 py-3 text-sm text-gray-500">
+                                                編集
+                                            </span>
+                                        </a>
+                                    </div>
+                                @endif
+                            </div>
+                       
                         </div>
         
                     <!-- stars - start -->
@@ -31,15 +45,6 @@
                             <!-- stars - end -->
                         </div>
                         <p class="text-gray-600">{{$post->body}}</p>
-                        @if(Auth::id() == $post->user_id)
-                            <div class="edit">
-                                <a href="/posts/{{ $post->id }}/anime_rate_edit">
-                                    <span class="rounded border px-2 py-1 text-sm text-gray-500">
-                                        edit
-                                    </span>
-                                </a>
-                            </div>
-                        @endif
                     </div>
                 @endforeach
                 </div>
@@ -62,11 +67,5 @@
     </div>
     </x-slot>
 
-    <x-slot name="sub2">
-        <div id="sub2">
-        <h1>今期のアニメ一覧</h1>
-        <h1>新規の口コミ</h1>
-        </div>
-    </x-slot>
     
  </x-app-layout> 

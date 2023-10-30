@@ -23,6 +23,7 @@
                   </div>
                 </div>
                 <!-- promo - end -->
+                
                 <div class="grid w-2/3 grid-cols-2 gap-8">
                     <div>
                       <div class="mb-1 font-semibold">アニメ評価</div>

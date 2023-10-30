@@ -122,31 +122,16 @@ class PostController extends Controller
         
         //アニメ評価を取り出す
         $count = $ratings->count();
+        
         for($i=0; $i < $count; $i++){
-            if($ratings[$i]["anime_id"] == $anime->id)
-            $rating = $ratings[$i]["rate"];
-        }
-        
-        //評価を配列でとりだす
-        $count_rate = Post::where('anime_id',$id)->pluck('rate')->toArray();
-        $count_rate = array_map('intval', $count_rate);
-        //dd($count_rate);
-  
-        
-        for($i=0;$i < count($count_rate);$i++){
-            for($j=0;$j < 5;$j++){
-                $percent[$j] = 0;
-                if($count_rate[$i] == $j + 1){
-                    dd($percent[$j]);
-                }
+            if($ratings[$i]["anime_id"] == $id){
+                $rating = $ratings[$i]["rate"];
+            }else{
+                $rating = 0;
             }
         }
-        dd($percent);
-        
-        
-        
-        
-        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating, 'count' =>$count_num, 'rate' => $count_list]);
+  
+        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating]);
     }
     
     /*--口コミ作成用--*/
@@ -294,12 +279,14 @@ class PostController extends Controller
         return view('posts.edit')->with(['rank' => $rank, 'reason' => $reason, 'user' => $user]);
     }
     
+    
     public function update_ranking(Request $request,Reason $reason, Rank $rank)
     {
         $user_id = Auth::id();
         $user = Auth::user();
         $input_rank = $request['rank'];
         $input_reason = $request['reason'];
+        
         $input_reason += ['user_id' => $user_id];
         $reason_id = $input_reason['id'];
         DB::table('reasons')->where('user_id',$user_id)->delete();
