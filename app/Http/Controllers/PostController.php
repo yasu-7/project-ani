@@ -24,7 +24,7 @@ class PostController extends Controller
     public function  index(Reason $reason, Rank $rank)
     {
         
-        $rankings = $reason->orderBy('updated_at', 'DESC')->get();
+        $rankings = $reason->orderBy('created_at', 'DESC')->get();
         
         return view('posts.index')->with([ 'rankings' => $rankings]);
     }
