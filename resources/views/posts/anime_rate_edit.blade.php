@@ -5,7 +5,7 @@
     
     <x-slot name="slot">
         <div class='posts'>
-            <form action="/posts/{{$post->id}}/update_rate" method="POST">
+            <form action="/posts/edit/{{$post->id}}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="title">{{$post->title}}</h2></div>
@@ -34,7 +34,7 @@
                         <option value="5">5</option>
                     </select>
                 </div>
-                <input type="submit" value="store_p"/>
+                <input type="submit" value="保存"/>
              </form>
             <div class="back">
                  <a href="/posts/anime">戻る</a>

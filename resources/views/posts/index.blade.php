@@ -72,10 +72,3 @@
         </div>
     </div>
 
-    
-        <div id="sub2">
-        <h1>今期のアニメ一覧</h1>
-        <h1>新規の口コミ</h1>
-        <a href='/posts/comment'>roll2</a>
-        </div>
-  

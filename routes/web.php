@@ -59,10 +59,10 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/posts/{id}/edit_post', [PostController::class, 'edit_ranking']);
     Route::put('/posts/{id}/update_ranking', [PostController::class, 'update_ranking']);
-    Route::delete('/posts/{id}', [PostController::class,'delete_post']);
+  
     
     Route::get('/posts/{id}/anime_rate_edit', [PostController::class, 'edit_rate']);
-    Route::put('/posts/{id}/update_rate', [PostController::class, 'update_rate']);
+    Route::put('/posts/edit/{id}', [PostController::class, 'update_rate']);
     Route::delete('/posts/{id}', [PostController::class,'delete_post']);
     
     Route::get('/posts/like/{anime}', [LikeController::class, 'like'])->name('like');

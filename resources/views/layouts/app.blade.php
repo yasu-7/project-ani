@@ -16,7 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/star.css'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-white">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -31,18 +31,15 @@
             <div class = "flex">
             
             @if (isset($sub1))
-                <div class = "flex-none w-72 max-h-max">{{ $sub1 }}</div>
+                <div class = "flex-none w-1/6 max-h-max bg-orange-500">{{ $sub1 }}</div>
             @endif
             <!-- Page Content -->
-            <div class = "flex-none w-7/12 max-h-max bg-white">
+            <div class = "flex-none w-3/4 max-h-max bg-white my-2">
                 <main>
                         {{ $slot }}
                 </main>
              </div>
-             
-            @if (isset($sub2))
-                {{ $sub2 }}
-            @endif
+            
             
             </div>
         </div>

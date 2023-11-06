@@ -93,7 +93,6 @@ class PostController extends Controller
         $anime->link = $datas[$count-1]["official_site_url"];
         $anime->image = $datas[$count-1]["images"]["recommended_url"];
         //urlが正常に挿入できるか判断
-        
         if ( $datas[$count-1]["images"]["recommended_url"] == null){
                 $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
         }
@@ -126,11 +125,13 @@ class PostController extends Controller
         for($i=0; $i < $count; $i++){
             if($ratings[$i]["anime_id"] == $id){
                 $rating = $ratings[$i]["rate"];
-            }else{
-                $rating = 0;
             }
         }
-  
+        
+        if(!isset($rating)){
+                $rating = 0;
+        }
+
         return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating]);
     }
     
@@ -234,7 +235,6 @@ class PostController extends Controller
         $response = Http::get($url);
         $datas = $response->json($key = null, $default = null)["works"];
         $count = $response->json($key = null, $default = null)["total_count"];
-        
         return view('posts.anime_rate')->with(['datas' => $datas,'post' => $post,"count" => $count]);
         }else{
             $anime_rate = Post::where('anime_id',$id)->first();
@@ -250,24 +250,23 @@ class PostController extends Controller
     }
     
     /*--評価投稿の編集--*/
-    public function update_rate(Request $request, Post $post)
+    public function update_rate(Request $request,Post $post, $id)
     {
         $user_id = Auth::id();
+        //$post = Post::find($id)->first();
+        //dd($post);
         $input_post = $request['post'];
         $input_post += ['user_id' => $user_id];
         $post->fill($input_post)->save();
-        
-
-    return redirect('/posts/anime_rate/list');
+        return redirect('/posts/anime_rate/list');
     }
     
     /*--コメントの編集--*/
     public function update(PostRequest $request, Comment $comment)
     {
-    $input_comment = $request['comment'];
-    $comment->fill($input_comment)->save();
-
-    return redirect('/posts/comment');
+        $input_comment = $request['comment'];
+        $comment->fill($input_comment)->save();
+        return redirect('/posts/comment');
     }
     
     /*--アニメranking投稿編集--*/
@@ -325,7 +324,6 @@ class PostController extends Controller
         $animes = $anime->get();
         $like_anime = View::where('user_id',$id)->pluck('anime_id')->toArray();
         $like_anime = array_map('intval', $like_anime);
-        
         $rankings = Reason::where('user_id',$id)->get();
         return view('/users/profile')->with(['users' => $user, 'posts' => $post, 'like' => $like, 'comment' => $comment, 'look' => $look, 'rankings' => $rankings]);
     }
@@ -336,6 +334,7 @@ class PostController extends Controller
         $animes = $anime->get();
         $like_anime = Like::where('user_id',$id)->pluck('anime_id')->toArray();
         $like_anime = array_map('intval', $like_anime);
+        
         return view('/users/like_list')->with(['users' => $user,'animes' => $animes,'like_anime' => $like_anime]);
     }
     
