@@ -41,6 +41,17 @@ class PostController extends Controller
         return view('posts.anime', compact('animes', 'like', 'not_view'));
     }
     
+    public function show_filter(Anime $anime)
+    {
+        $user_id = Auth::id();
+        $not_view = View::where('user_id',$user_id)->pluck('anime_id')->toArray();
+        $not_view = array_map('intval', $not_view);
+        
+        $like=Like::where('user_id', $user_id)->first();
+        $animes = $anime->get();
+        return view('posts.anime_filter', compact('animes', 'like', 'not_view'));
+    }
+    
     /*-- 口コミの表示--*/
     public function show_comment(Comment $comment)
     {
@@ -50,7 +61,9 @@ class PostController extends Controller
     /*-- アニメ評価の表示--*/
     public function show_post(Post $post)
     {
-        return view('posts.anime_rate_v')->with(['posts' => $post->get()]);
+        $post = Post::paginate(15);
+        
+        return view('posts.anime_rate_v')->with(['posts' => $post]);
     }
     
     /*--ランキングアニメ投稿--*/

@@ -8,6 +8,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\AnnictController;
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\YoutubeController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\AccessController;
 */
 Route::get('/', [PostController::class, 'index']);
 Route::get('/view', [RankController::class, 'rank_view']);
-Route::get('/view_post', [RankController::class, 'post_view']);
+//Route::get('/view_post', [RankController::class, 'post_view']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -40,11 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/reasons', [PostController::class, 'rank_post']);
     
     Route::get('/posts/anime', [PostController::class, 'show']);
+    Route::get('/posts/anime_filter', [PostController::class, 'show_filter']);
     Route::get('/posts/comment', [PostController::class, 'show_comment']);
     Route::get('/posts/anime_ranking', [RankController::class, 'ranking']);
     Route::get('/posts/anime_rate/list', [PostController::class, 'show_post']);
     Route::get('/anime/show',[AnnictController::class, 'show_annict']);
     Route::get('/anime/search',[AnnictController::class, 'search_annict']);
+    Route::get('/anime/show_season',[AnnictController::class, 'show_season']);
+    Route::get('/anime/search_season',[AnnictController::class, 'search_season']);
     
     
     Route::get('/users/{id}', [PostController::class, 'profile']);
@@ -72,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/unlook/{anime}', [ViewController::class, 'unlook'])->name('unlook');
     
     Route::get('/posts/{anime}/anime_count',[AccessController::class, 'index']);
+    
+    Route::get('youtube/anime', [YoutubeController::class, 'searchVideos']);
     
 });
 

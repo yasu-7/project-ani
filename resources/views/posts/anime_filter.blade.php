@@ -12,7 +12,8 @@
           </div>
         </div>
       </div>
-      <button type="button" class="py-2 px-10 rounded items-left"><a href='/posts/anime_filter'>絞り込み</button></a><br>
+      
+      <button type="button" class="py-2 px-10 rounded bg-blue-200 items-left"><a href='/posts/anime'>絞り込み</button></a><br>
       <div class="flex justify-center overflow-x-auto">
         <table class="md:border-collapse">
           <!-- head -->
@@ -42,6 +43,7 @@
           <tbody>
                   <!-- row 1 -->
               @foreach ($animes as $anime)
+              @if(!in_array($anime->id,$not_view))
                 <tr class="border-b-8">
                   <td>
                       <div class="flex items-center">
@@ -107,6 +109,7 @@
                     <button class="btn btn-ghost btn-xs"><a href="/posts/{{ $anime->id }}/anime_rate">アニメ評価</a></button>
                   </th>
                 </tr>
+              @endif
               @endforeach
             </tbody>
         </table>

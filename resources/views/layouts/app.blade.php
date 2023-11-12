@@ -31,7 +31,7 @@
             <div class = "flex">
             
             @if (isset($sub1))
-                <div class = "flex-none w-1/6 max-h-max bg-orange-500">{{ $sub1 }}</div>
+                <div class = "flex-none w-1/6 max-h-max bg-blue-200">{{ $sub1 }}</div>
             @endif
             <!-- Page Content -->
             <div class = "flex-none w-3/4 max-h-max bg-white my-2">

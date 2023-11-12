@@ -4,15 +4,10 @@
     </x-slot>
     
     <x-slot name="slot">
-        <form action="/anime/search"　method="GET">
+        <form action="/anime/search_season"　method="GET">
+        
         <div class="bg-white py-6 sm:py-8 lg:py-12">
           <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-             
-            最近のアニメ
-            @for($i = 0; $i < 5; $i++)
-                {{$data[$i]["title"]}}
-            @endfor
-            {{$data->links() }}
             <div class="rounded-lg bg-gray-100 px-4 py-6 md:py-8 lg:py-12">
               <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Introducing</p>
         
@@ -26,13 +21,18 @@
         </div>
         <div class="flex justify-center">
             <div class="w-80">
-        　      <span class="font-semibold text-xl text-yellow-400">キーワード:</span><input class="text-gray-600" type="search" name="title" placeholder="検索ワード">
+        　      <span class="font-semibold text-xl text-yellow-400">キーワード:</span>
+        　      <input class="bg-yellow-400 text-violet-700" type="search"name="period" placeholder="検索年代">
             </div>
-            
-            <div class="w-80">
-        　     <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show_season'>年代で探す</button></a>
+        　     <div class="w-80">
+        　      <span class="font-semibold text-xl text-yellow-400">季節:</span>
+        　      <select name="season">
+                        <option value="spring">春</option>
+                        <option value="summer">夏</option>
+                        <option value="autumn">秋</option>
+                        <option value="winter">冬</option>
+                </select>
             </div>
-            
         </div></br>
         <div class="text-center">
             <button class="bg-yellow-400 font-medium text-violet-500 py-2 px-4 rounded ">

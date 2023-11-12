@@ -6,14 +6,43 @@ use Illuminate\Http\Request;
 use Cloudinary;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
 class AnnictController extends Controller
 {
     public function  show_annict()
     {
-        return view('anime.show');
+        $access_token = config('services.annict.access_token');
+        
+        //最近のアニメ
+        $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_season=2023-autumn&page=2";
+        $response =  Http::get($url);
+        //dd($new);
+        $datas = $response->json($key = null, $default = null)["works"];
+        
+        $coll = collect($datas);
+        $data = $this->paginate($coll, 5, null, ['path'=>'/anime/show']);
+        //dd($data);
+        
+        //dd($data);
+        
+        return view('anime.show', compact('data'));
     }
+    
+        private function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
+    
+    
+    public function  show_season()
+    {
+        return view('anime.show_season');
+    }
+    
     
     public function search_annict(Request $request)
     {
@@ -37,17 +66,33 @@ class AnnictController extends Controller
         }
         }
         
-        $new = "https://api.annict.com/v1/works?access_token={$access_token}&filter_season=2023-autumn&page=2";
-        $new =  Http::get($new);
-        //dd($new);
-        $recent_data = $new->json($key = null, $default = null)["works"];
+        return view("anime.search")->with(["datas"=> $datas, "count" => $count_num]);
+        }
+    }
+    
+    public function search_season(Request $request)
+    {
+        //dd($request);
+        if ($request->input('period') == null){
+            $count = 0;
+             return view("anime.search_season")->with(["count" => $count]);
+        }else{
+        $period=$request->input('period');
+        $season=$request->input('season');
+        $access_token = config('services.annict.access_token');
+        $url = "https://api.annict.com/v1/works?access_token={$access_token}&filter_season={$period}-{$season}";
+        $response = Http::get($url);
+        $datas = $response->json($key = null, $default = null)["works"];
+        $count = $response->json($key = null, $default = null)["total_count"];
         
-        $perPage = 5;
-        $page = Paginator::resolveCurrentPage('page');
+        $count_num =  count($datas);
+        for($i = 0; $i < $count_num; $i++){
+            if (empty($datas[$i]["images"]["recommended_url"])){
+                $datas[$i]["images"]["recommended_url"] = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
+        }
+        }
         
-        $paginatedData = new LengthAwarePaginator($recent_data , $perPage, $page, $page, array('path'=>'/search'));
-        
-        return view("anime.search")->with(["datas"=> $datas, "count" => $count_num, "recent" => $paginatedData, "data_new" => $recent_data]);
+        return view("anime.search_season")->with(["datas"=> $datas, "count" => $count_num, "period" => $period]);
         }
     }
     
