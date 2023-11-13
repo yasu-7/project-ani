@@ -5,68 +5,58 @@
     
     <x-slot name="slot">
         <div class="bg-white lg:pb-12">
-          <div class="mx-auto max-w-screen-2xl px-4 md:px-8 pt-6">
+          <div class="mx-auto max-w-screen-2xl px-4 md:px-8 pt-6 bg-gray-50">
             <!-- menu - start -->
-            <div class=" rounded-lg border bg-gray-50 shadow-sm lg:block">
+            <div class=" rounded-lg border bg-white shadow-sm lg:block">
               <h2><div class="text-2xl text-left mb-1 font-semibold p-4">{{$users->name}}</h2>
               <div class="mx-auto flex max-w-screen-lg items-center gap-8 p-4">
-                <div class="flex">
-                    <div>
+                <div class="grid w-full grid-cols-2 gap-8">
+                    <div class="rounded p-2 text-center">
                       <div class="mb-1 font-semibold">いいね数</div>
-                      <p class="text-sm text-gray-500">{{$like->count()}}</p>
+                      <p class="text-lg text-gray-500">{{$like->count()}}</p>
                     </div>
         
-                    <div>
+                    <div class="rounded p-2 text-center">
                       <div class="mb-1 font-semibold">視聴済み
                       </div>
-                      <p class="text-sm text-gray-500">{{$look->count()}}</p>
+                      <p class="text-lg text-gray-500">{{$look->count()}}</p>
                     </div>
           
-                    <div>
+                    <div class="rounded p-2 text-center">
                       <div class="mb-1 font-semibold">評価数</div>
-                      <p class="text-sm text-gray-500">{{$posts->count()}}</p>
+                      <p class="text-lg text-gray-500">{{$posts->count()}}</p>
                     </div>
         
-                    <div>
+                    <div class="rounded p-2 text-center">
                       <div class="mb-1 font-semibold">コメント数</div>
-                      <p class="text-sm text-gray-500">{{$comment->count()}}</p>
+                      <p class="text-lg text-gray-500">{{$comment->count()}}</p>
                     </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-    <div class="sm:hidden">
-      <label for="tabs" class="sr-only">Select list</label>
-      <select id="tabs" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option>お気に入り一覧</option>
-          <option>視聴一覧</option>
-          <option>評価一覧</option>
-          <option>コメント一覧</option>
-      </select>
-    </div>
-        <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400 p-6">
-            <li class="w-full">
-                <a href="/users/{{ $users->id }}/list/like" class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" aria-current="page">いいね</a>
-            </li>
-            <li class="w-full">
-                <a href="/users/{{ $users->id }}/list/view" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">視聴済み</a>
-            </li>
-            <li class="w-full">
-                <a href="/users/{{ $users->id }}/list/rate" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">評価一覧</a>
-            </li>
-            <li class="w-full">
-                <a href="/users/{{ $users->id }}/list/comment" class="inline-block w-full p-4 bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">コメント一覧</a>
-            </li>
-        </ul>
-        
-        <h1>投稿</h1>
-        
-        
-        
-        <div class="ranking bg-white">
+            <!-- menu - end -->
+            <div class="mx-auto max-w-screen-2xl px-4 md:px-8 pt-6 bg-gray-50">
+              <div class="rounded-lg bg-white">
+                <div class="text-center text-2xl border-t-4 border-b-4 border-green-500 mt-8 py-2">ユーザー詳細情報</div>
+                <ul class="text-lg font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+                    <li class="w-full">
+                        <a href="/users/{{ $users->id }}/list/like" class="inline-block w-full p-4 bg-white rounded-l-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">いいね一覧</a>
+                    </li>
+                    <li class="w-full">
+                        <a href="/users/{{ $users->id }}/list/view" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">視聴済み一覧</a>
+                    </li>
+                    <li class="w-full">
+                        <a href="/users/{{ $users->id }}/list/rate" class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">評価一覧</a>
+                    </li>
+                    <li class="w-full">
+                        <a href="/users/{{ $users->id }}/list/comment" class="inline-block w-full p-4 bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">コメント一覧</a>
+                    </li>
+                </ul>
+                <div class="text-center text-2xl border-t-4 border-b-4 border-green-500 py-2">投稿</div>
+                <div class="ranking bg-white">
            @foreach ( $rankings as $ranking)
-          <div class="bg-gray-50 py-6 sm:py-8 lg:py-12">
+          <div class="bg-white py-6 sm:py-8 lg:py-12">
             <div class="mx-auto max-w-screen-md outline rounded-lg bg-white px-4 md:px-8">
               <h1 class="pt-3 text-right font-bold text-gray-800">投稿日：{{$ranking->updated_at}}</h1>
               <h1 class="pb-3 text-left font-bold text-gray-800">ユーザー名：{{$ranking->user->name}}</h1>
@@ -114,6 +104,9 @@
             </div>
           </div>
             @endforeach
+        </div>
+              </div>
+            </div>
         </div>
     </x-slot>
     

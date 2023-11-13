@@ -1,6 +1,7 @@
 <x-app-layout>
     
     <x-slot name="slot">
+    <div class="px-4 py-6 md:py-8 lg:py-12">  
       <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div class="rounded-lg bg-gray-100 px-4 py-6 md:py-8 lg:py-12">
           <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Introducing</p>
@@ -11,13 +12,15 @@
             ユーザー全体の評価によるランキングを表示しています。</br>
           </div>
         </div>
-      </div>
-      <button type="button" class="py-2 px-10 rounded items-left"><a href='/posts/anime_filter'>絞り込み</button></a><br>
-      <div class="flex justify-center overflow-x-auto">
-        <table class="md:border-collapse">
+      
+      <div class=" rounded bg-white my-3">
+        <div class="flex justify-end">
+            <button type="button" class="rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-300 mx-6 mt-3"><a href='/posts/anime_filter'>絞り込み</button></a><br>
+        </div>
+        <div class="flex justify-center bg-white rounded p-8">
+        <table class="md:border-collapse w-full">
           <!-- head -->
           <thead>
-              <div class="px-8 py-3">
                 <tr class="border-b-8">
                   <th>
                     <div class="px-8 py-3">
@@ -53,8 +56,8 @@
                     
                   <!-- title -->
                   <td>
-                      <div class="font-bold text-center px-8"><a href="/posts/{{ $anime->id }}/anime_view">{{$anime->name}}</a></div>
-                      <div class='era text-center px-8 py-3'>{{$anime->era}}</div>
+                      <div class="font-bold text-center px-2"><a href="/posts/{{ $anime->id }}/anime_view">{{$anime->name}}</a></div>
+                      <div class='era text-center px-2 py-3'>{{$anime->era}}</div>
                   </td>
                 
                   <!-- link -->
@@ -97,7 +100,6 @@
                             <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
                             	<a href="{{ route('unlook', $anime) }}" class="btn btn-secondary btn-sm">
                             		<div class="text-blue-600 text-center">視聴済み</div>
-                            		</div>
                             	</a>
                             @endif
                         </span>
@@ -110,8 +112,12 @@
               @endforeach
             </tbody>
         </table>
+        
       </div>
-    </x-slot>
+      </div>
+    </div>
+    </div>
+  </x-slot>
     
     <x-slot name="sub1">
           <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show'>アニメを探す</button></a><br>

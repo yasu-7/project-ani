@@ -7,7 +7,6 @@
     
     
 <x-slot name="slot">
-  <div class="w-full bg-white">
       <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div class="rounded-lg bg-gray-100 px-4 py-6 md:py-8 lg:py-12">
           <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Introducing</p>
@@ -18,12 +17,10 @@
             ユーザー全体の評価によるランキングを表示しています。</br>
           </div>
         </div>
-      </div>
-  <div class="flex justify-center w-full">
+  <div class="flex justify-center rounded bg-gray-300 p-8 ">
     <table class="md:border-collapse w-full">
       <!-- head -->
       <thead>
-          <div class="px-8 py-3">
             <tr class="border-b-8">
               <th>
                 <div class="px-8 py-3">
@@ -52,7 +49,6 @@
                 </div>
               </th>
             </tr>
-          </div>
       </thead>
       <tbody>
               <!-- row 1 -->

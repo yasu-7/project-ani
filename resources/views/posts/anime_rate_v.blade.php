@@ -55,7 +55,7 @@
                           　　      　</svg>
                                 </div>
                             @endfor 
-                            <p calss="text-2xl">アニメ評価：{{$post->rate}}</p>
+                            <p calss="text-2xl">：{{$post->rate}}</p>
                             <!-- stars - end -->
                         </div>
                         <p class="text-gray-600">{{$post->body}}</p>
