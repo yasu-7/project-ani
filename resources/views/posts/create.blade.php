@@ -32,32 +32,29 @@
               
               <br />
               
-              <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-              
               <h2 class="mb-2 pl-4 text-left font-semibold text-gray-800 sm:text-2xl md:mb-4">ランキング</h2>
               <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
                  <div class="flex flex-col gap-4 mb-2">
                     <div class="flex flex-row gap-4 mb-2">
                       <input type="hidden" name="rank[number][]" value="1" />
-                      <div class="text-center w-1/5 rounded-lg bg-gray-300 p-4">第1位</div>
-                      <input type="textbox" name="rank[title][]" placeholder="作品名" class="w-4/5 rounded-lg bg-gray-300 p-4" />
+                      <div class="text-center w-1/5 rounded-lg font-semibold p-4">第1位</div>
+                      <input type="textbox" name="rank[title][]" placeholder="作品名を入力してください" class="w-4/5 rounded-lg p-4 border-black" />
                     </div>
+                     {{ $errors->first('rank.title.0') }}
       
                     <div class="flex flex-row gap-4 mb-2">
                       <input type="hidden" name="rank[number][]" value="2"  />
-                      <div class="text-center w-1/5 rounded-lg bg-gray-300 p-4">第2位</div>
-                      <input type="textbox" name="rank[title][]" placeholder="作品名" class="w-4/5 rounded-lg bg-gray-300 p-4"/>
+                      <div class="text-center w-1/5 rounded-lg font-semibold p-4">第2位</div>
+                      <input type="textbox" name="rank[title][]" placeholder="作品名を入力してください" class="w-4/5 rounded-lg p-4 border-black"/>
                     </div>
+                    {{ $errors->first('rank.title.1') }}
       
                     <div class="flex flex-row gap-4 mb-2">
                       <input type="hidden" name="rank[number][]" value="3" />
-                      <div class="text-center w-1/5 rounded-lg bg-gray-300 p-4">第3位</div>
-                      <input type="textbox" name="rank[title][]" placeholder="作品名" class="w-4/5 rounded-lg bg-gray-300 p-4"/>
+                      <div class="text-center w-1/5 rounded-lg font-semibold p-4">第3位</div>
+                      <input type="textbox" name="rank[title][]" placeholder="作品名を入力してください" class="w-4/5 rounded-lg p-4 border-black"/>
                     </div>
+                    {{ $errors->first('rank.title.2') }}
                   </div>
               </div>
     

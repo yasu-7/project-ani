@@ -26,6 +26,7 @@
                             <textarea rows="8" name="comment[body]" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="口コミや感想などを投稿"></textarea>
                         </div>
                     </div>
+                     {{ $errors->first('comment.body') }}
                     
                     <div class="flex flex-row justify-center gap-8 p-4">
                         <input type="submit" value="保存" class="text-xl no-underline hover:underline decoretion-sky-500 hover:text-sky-500"/>

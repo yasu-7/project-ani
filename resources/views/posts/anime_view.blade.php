@@ -138,7 +138,7 @@
             <div class="mx-auto max-w-screen-md px-4 md:px-8">
             <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl xl:mb-12">アニメ評価一覧</h2>
     
-            <div class="divide-y rounded">
+            <div class="divide-y rounded bg-white px-4">
             @foreach ($posts as $post)
                 <!-- review - start -->
                 <div class="flex flex-col gap-3 py-4 md:py-8 border-t-2 border-b-2">

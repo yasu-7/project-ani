@@ -154,6 +154,10 @@ class PostController extends Controller
     /*--口コミ作成用--*/
     public function comment(Comment $comment, Request $request) // 引数をRequestからPostRequestにする
     {
+        $request->validate([
+	        'comment.body' => 'required',
+        ]);
+        
         $input = $request['comment'];
         $input += ['user_id' => $request->user()->id];
         $comment->fill($input)->save();
