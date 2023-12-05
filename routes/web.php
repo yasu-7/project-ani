@@ -20,8 +20,8 @@ use App\Http\Controllers\YoutubeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [PostController::class, 'index']);
-Route::get('/view', [RankController::class, 'rank_view']);
+Route::get('/', [PostController::class, 'index'])->name('index');
+//Route::get('/view', [RankController::class, 'rank_view']);
 //Route::get('/view_post', [RankController::class, 'post_view']);
 
 Route::get('/dashboard', function () {
@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     //Route::get('/', [PostController::class, 'index']);
-    Route::get('/posts/create', [PostController::class, 'create']);
+    Route::get('/posts/create', [PostController::class, 'create'])->name('create');
     Route::get('/posts/comment_create', [PostController::class, 'create_comment']);
     
     Route::get('/posts/{id}/anime_rate', [PostController::class, 'rate']);
@@ -40,21 +40,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{datas}', [PostController::class, 'rate_post']);
     Route::post('/reasons', [PostController::class, 'rank_post']);
     
-    Route::get('/posts/anime', [PostController::class, 'show']);
-    Route::get('/posts/anime_filter', [PostController::class, 'show_filter']);
-    Route::get('/posts/comment', [PostController::class, 'show_comment']);
-    Route::get('/posts/anime_ranking', [RankController::class, 'ranking']);
-    Route::get('/posts/anime_rate/list', [PostController::class, 'show_post']);
-    Route::get('/anime/show',[AnnictController::class, 'show_annict']);
-    Route::get('/anime/search',[AnnictController::class, 'search_annict']);
-    Route::get('/anime/show_season',[AnnictController::class, 'show_season']);
-    Route::get('/anime/search_season',[AnnictController::class, 'search_season']);
+    Route::get('/posts/anime', [PostController::class, 'show'])->name('anime');
+    Route::get('/posts/anime_filter', [PostController::class, 'show_filter'])->name('anime_filter');
+    Route::get('/posts/comment', [PostController::class, 'show_comment'])->name('comment');
+    Route::get('/posts/anime_ranking', [RankController::class, 'ranking'])->name('ranking');
+    Route::get('/posts/anime_rate/list', [PostController::class, 'show_post'])->name('rate_list');
+    Route::get('/anime/show',[AnnictController::class, 'show_annict'])->name('show');
+    Route::get('/anime/search',[AnnictController::class, 'search_annict'])->name('search');
+    Route::get('/anime/show_season',[AnnictController::class, 'show_season'])->name('show_season');
+    Route::get('/anime/search_season',[AnnictController::class, 'search_season'])->name('search_season');
     
     
     Route::get('/users/{id}', [PostController::class, 'profile']);
     Route::get('/users/{id}/list/view', [PostController::class, 'view_list']);
     Route::get('/users/{id}/list/like', [PostController::class, 'like_list']);
     Route::get('/users/{id}/list/rate', [PostController::class, 'rate_list']);
+    Route::get('/users/{id}/list/ranking', [PostController::class, 'ranking_list']);
     Route::get('/users/{id}/list/comment', [PostController::class, 'comment_list']);
     
     Route::get('/posts/{comment}/edit', [PostController::class, 'edit']);

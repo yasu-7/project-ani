@@ -3,19 +3,50 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                        {{ __('ホーム') }}
                     </x-nav-link>
                 </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('show')" :active="request()->routeIs('show','search','show_season','search_season')">
+                        {{ __('アニメ検索') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('anime')" :active="request()->routeIs('anime','anime_filter')">
+                        {{ __('アニメ一覧') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('rate_list')" :active="request()->routeIs('rate_list')">
+                        {{ __('評価一覧') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('ranking')" :active="request()->routeIs('ranking')">
+                        {{ __('ランキング') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                        {{ __('オススメ投稿') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('comment')" :active="request()->routeIs('comment')">
+                        {{ __('口コミ一覧') }}
+                    </x-nav-link>
+                </div>
+                
             </div>
 
             <!-- Settings Dropdown -->
@@ -67,9 +98,34 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                {{ __('ホーム') }}
             </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('show')" :active="request()->routeIs('show','search','show_season','search_season')">
+                {{ __('アニメ検索') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('anime')" :active="request()->routeIs('anime','anime_filter')">
+                {{ __('アニメ一覧') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('rate_list')" :active="request()->routeIs('rate_list')">
+                {{ __('評価一覧') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('ranking')" :active="request()->routeIs('ranking')">
+                {{ __('ランキング') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                {{ __('オススメ投稿') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('comment')" :active="request()->routeIs('comment')">
+                {{ __('口コミ一覧') }}
+            </x-responsive-nav-link>
+            
         </div>
 
         <!-- Responsive Settings Options -->

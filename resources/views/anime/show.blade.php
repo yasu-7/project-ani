@@ -5,15 +5,37 @@
     
     <x-slot name="slot">
         <form action="/anime/search"　method="GET">
-        <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="py-6 sm:py-8 lg:py-12">
           <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-             
-            最近のアニメ
-            @for($i = 0; $i < 5; $i++)
-                {{$data[$i]["title"]}}
-            @endfor
-            {{$data->links() }}
-            <div class="rounded-lg bg-gray-100 px-4 py-6 md:py-8 lg:py-12">
+            
+            <div class="mx-auto max-w-screen-2xl p-4 md:px-8 bg-gray-50 mb-8 rounded">
+            <div class="text-2xl font-semibold mb-4">最近のアニメ</div>
+                <div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-1 xl:grid-cols-5 xl:gap-8">
+                          <!-- article - start -->
+                    @for($i = 5*($page - 1); $i < 5*($page); $i++)
+                    <div class="flex flex-col overflow-hidden rounded-lg border bg-white">
+                        <a href="/posts/{{ $data[$i]["id"] }}/anime_view" class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
+                                <img src="{{$data[$i]["images"]["recommended_url"]}}" loading="lazy" alt="Photo by Minh Pham" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                        </a>
+            
+                        <div class="flex flex-1 flex-col p-4 sm:p-6">
+                            <h2 class="mb-2 text-lg font-semibold text-gray-800 no-underline hover:underline decoretion-sky-500 hover:text-sky-500">
+                                <a href="/posts/{{ $data[$i]["id"] }}/anime_view" class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">{{$data[$i]["title"]}}</a>
+                            </h2>
+                            <p>
+                                <a href="/posts/{{ $data[$i]["id"] }}/anime_rate" class="no-underline hover:underline decoretion-sky-500 hover:text-sky-500">アニメ評価</a></br>
+                                <a href="{{$data[$i]["official_site_url"]}}" class="no-underline hover:underline decoretion-sky-500 hover:text-sky-500">公式サイトへ</a>
+                            </p>
+                        </div>
+                    </div>
+                    @endfor
+                </div>
+                <div class="mt-4">
+                    {{  $data->links() }}
+                </div>
+            </div>
+
+            <div class="rounded-lg bg-gray-100 px-4 py-6 md:py-8 lg:py-12 mt-6">
               <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Introducing</p>
         
               <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">アニメの作品名を入力してください</h2>
@@ -26,32 +48,33 @@
         </div>
         <div class="flex justify-center">
             <div class="w-80">
-        　      <span class="font-semibold text-xl text-yellow-400">キーワード:</span><input class="text-gray-600" type="search" name="title" placeholder="検索ワード">
+        　      <span class="font-semibold text-xl">キーワード:</span><input class="text-gray-600" type="search" name="title" placeholder="検索ワード">
             </div>
             
             <div class="w-80">
-        　     <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show_season'>年代で探す</button></a>
+        　     <button type="button" class="font-semibold text-xl p-2"><a href='/anime/show_season'>年代で探す</button></a>
             </div>
             
         </div></br>
         <div class="text-center">
-            <button class="bg-yellow-400 font-medium text-violet-500 py-2 px-4 rounded ">
+            <button class="bg-black font-medium text-white py-2 px-4 rounded hover:bg-gray-400">
                 <input class="" type="submit" value="Search">
             </button>
         </div>
         </form>
     </x-slot>
     
-    <x-slot name="sub1">
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show'>アニメを探す</button></a><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/anime'>アニメ一覧</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/anime_rate/list'>アニメ評価一覧</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/anime_ranking'>アニメランキング</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/create'>アニメランキング投稿</a></button><br>  
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show'>アニメを評価</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/comment'>口コミ一覧</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/comment_create'>口コミ投稿</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/users/{{Auth::id()}}'>プロフィール</a></button><br>
-    </x-slot>
+    <x-slot name="sub1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+      <button type="button" class="text-2xl text-white bg-blue-600 font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/anime/show'>アニメを探す</button></a><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/anime'>アニメ一覧</button></a><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/anime_rate/list'>アニメ評価一覧</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/youtube/anime'>PV集<br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/anime_ranking'>アニメランキング</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/create'>アニメランキング投稿</a></button><br>  
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/anime/show'>アニメを評価</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/comment'>口コミ一覧</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/comment_create'>口コミ投稿</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/users/{{Auth::id()}}'>プロフィール</a></button><br>
+  </x-slot>
     
  </x-app-layout> 

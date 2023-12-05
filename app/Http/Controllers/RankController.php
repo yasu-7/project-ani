@@ -18,6 +18,14 @@ class RankController extends Controller
     {
         
         $ratings = Post::select('anime_id')->selectRaw('AVG(rate) as rate')->groupby('anime_id')->orderBy('rate', 'desc')->get();
+        $count = count($ratings);
+      
+      
+        //小数点第二位を四捨五入
+        for ($i=0; $i < $count; $i++){
+            $ratings[$i]["rate"] = round($ratings[$i]["rate"],1);
+        }
+        
         return view('posts.anime_ranking')->with([ 'ratings' => $ratings]);
     }
 }

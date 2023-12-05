@@ -24,7 +24,9 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment.body' => 'required|string|max:4000',
+            'reason.title' => 'required|string|min:2',
+            'reason.body' => 'required|string|min:2',
+            
         ];
     }
 }

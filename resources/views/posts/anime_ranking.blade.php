@@ -7,8 +7,9 @@
     
     
 <x-slot name="slot">
+    <div class="py-6 sm:py-8 lg:py-12">
       <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-        <div class="rounded-lg bg-gray-100 px-4 py-6 md:py-8 lg:py-12">
+        <div class="rounded-lg bg-gray-50 px-4 py-6 md:py-8 lg:py-12">
           <p class="mb-2 text-center font-semibold text-indigo-500 md:mb-3 lg:text-lg">Introducing</p>
     
           <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">アニメのランキングを調べる</h2>
@@ -17,7 +18,7 @@
             ユーザー全体の評価によるランキングを表示しています。</br>
           </div>
         </div>
-  <div class="flex justify-center rounded bg-gray-300 p-8 ">
+  <div class="flex justify-center rounded bg-white p-8 mt-8">
     <table class="md:border-collapse w-full">
       <!-- head -->
       <thead>
@@ -29,17 +30,17 @@
               </th>
               <th>title</th>
               <th>
-                <div class="px-4 py-3">
+                <div class="py-3">
                 like数
                 </div>
               </th>
               <th>
-                <div class="px-4 py-3">
+                <div class="py-3">
                 視聴済み
                 </div>
               </th>
               <th>
-                <div class="px-4 py-3 text-left">
+                <div class="pl-2 py-3 text-left">
                 アニメ評価
                 </div>
               </th>
@@ -57,7 +58,7 @@
               <td>
                   <div class="flex items-center">
                       <div class='image'>
-                          <img class="mask mask-squircle w-28 h-24" src="{{$rating->anime->image}}" alt="">
+                          <img class="mask mask-squircle w-28 h-24" src="{{$rating->anime->image}}">
                       </div>
                   </div>
               </td>
@@ -109,8 +110,8 @@
                 
                 <td>
                 
-                    <div class="text-left ">レート:{{$rating->rate}}</div>
-                    <div class="items-left">
+                    <div class="text-left px-4">レート:{{$rating->rate}}</div>
+                    <div class="items-center">
                       <div class="flex">
                           @for($i=0; $i < floor($rating->rate); $i++)
                               <div class="flex-none">
@@ -129,7 +130,7 @@
                 </td>
                   
               <th class="border-b-8 text-left">
-                <button class="btn btn-ghost btn-xs"><a href="/posts/{{ $rating->anime->id }}/anime_rate">評価する</a></button>
+                <button class="btn btn-ghost btn-xs no-underline hover:underline decoretion-sky-500 hover:text-sky-500"><a href="/posts/{{ $rating->anime->id }}/anime_rate">評価する</a></button>
               </th>
             </tr>
           @endforeach
@@ -137,19 +138,21 @@
     </table>
   </div>
   </div>
+  </div>
 </x-slot>
 
-    <x-slot name="sub1">
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show'>アニメを探す</button></a><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/anime'>アニメ一覧</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/anime_rate/list'>アニメ評価一覧</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/anime_ranking'>アニメランキング</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/create'>アニメランキング投稿</a></button><br>  
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/anime/show'>アニメを評価</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/comment'>口コミ一覧</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/posts/comment_create'>口コミ投稿</a></button><br>
-          <button type="button" class=" text-black w-64 text-left py-2 px-10 rounded"><a href='/users/{{Auth::id()}}'>プロフィール</a></button><br>
-    </x-slot>
+  <x-slot name="sub1">
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/anime/show'>アニメを探す</button></a><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/anime'>アニメ一覧</button></a><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/anime_rate/list'>アニメ評価一覧</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/youtube/anime'>PV集<br>
+      <button type="button" class="text-2xl text-white bg-blue-600 font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/anime_ranking'>アニメランキング</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/create'>アニメランキング投稿</a></button><br>  
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/anime/show'>アニメを評価</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/comment'>口コミ一覧</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/posts/comment_create'>口コミ投稿</a></button><br>
+      <button type="button" class="text-2xl text-black font-bold text-left w-full py-2 px-10 rounded hover:bg-blue-600 hover:text-white"><a href='/users/{{Auth::id()}}'>プロフィール</a></button><br>
+  </x-slot>
     
     
  </x-app-layout> 

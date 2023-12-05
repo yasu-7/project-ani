@@ -70,6 +70,31 @@ class YoutubeController extends Controller
     }
     }
     
-    return view('youtube.anime')->with(['kadokawa' => $kadokawa_PV, 'aniplex' => $aniplex_PV]);
+    
+    $params['channelId'] = 'UC47AYUs8AVU1QsT5LhpXjaw';
+    $params['maxResults'] = 20;
+    
+    try {
+        $Response3 = $youtube->search->listSearch('snippet', $params);
+    } catch (Google_Service_Exception $e) {
+        echo htmlspecialchars($e->getMessage());
+        exit;
+    } catch (Google_Exception $e) {
+        echo htmlspecialchars($e->getMessage());
+        exit;
+    }
+    
+    foreach ($Response3['items'] as $result) {
+            $video3[] = $result;
+    }
+    
+    for($i=0;$i<$params['maxResults']; $i++){
+    if(strpos($video3[$i]['snippet']['title'], 'PV')){
+        //dd($videos[$i]['snippet']['title']);
+        $jump_PV[$i] = $video3[$i];
+    }
+    }
+    
+    return view('youtube.anime')->with(['kadokawa' => $kadokawa_PV, 'aniplex' => $aniplex_PV, 'jump' => $jump_PV,]);
 }
 }

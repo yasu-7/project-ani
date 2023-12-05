@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-session-status class="mb-4 bg-amber-100" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -31,8 +31,13 @@
                 <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
-
+            
         <div class="flex items-center justify-end mt-4">
+            
+            <div class="flex justify-start pr-16">
+                <a href="/register" class="no-underline hover:underline decoretion-sky-500 hover:text-sky-500">新規登録</a>
+            </div>
+            
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
@@ -40,7 +45,7 @@
             @endif
 
             <x-primary-button class="ml-3">
-                {{ __('Log in') }}
+                {{ __('ログイン') }}
             </x-primary-button>
         </div>
     </form>

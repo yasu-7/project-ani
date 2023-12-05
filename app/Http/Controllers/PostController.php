@@ -61,7 +61,7 @@ class PostController extends Controller
     /*-- アニメ評価の表示--*/
     public function show_post(Post $post)
     {
-        $post = Post::paginate(15);
+        $post = Post::orderBy("created_at","desc")->paginate(15);
         
         return view('posts.anime_rate_v')->with(['posts' => $post]);
     }
@@ -138,18 +138,21 @@ class PostController extends Controller
         for($i=0; $i < $count; $i++){
             if($ratings[$i]["anime_id"] == $id){
                 $rating = $ratings[$i]["rate"];
+                $rating = round($rating, 1);
             }
         }
-        
         if(!isset($rating)){
                 $rating = 0;
         }
-
-        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating]);
+        
+        $rate = Post::where('anime_id',$id)->where('user_id',Auth::id())->first();
+        
+        //dd($rate);
+        return view('posts.anime_view')->with(['anime' => $anime, 'accessCounter' => $accessCounter, 'posts' => $post, 'rating' => $rating, 'rate' => $rate]);
     }
     
     /*--口コミ作成用--*/
-    public function comment(Comment $comment, PostRequest $request) // 引数をRequestからPostRequestにする
+    public function comment(Comment $comment, Request $request) // 引数をRequestからPostRequestにする
     {
         $input = $request['comment'];
         $input += ['user_id' => $request->user()->id];
@@ -160,6 +163,13 @@ class PostController extends Controller
     /*--アニメ評価投稿--*/
     public function rate_post(Post $post, Request $request, Anime $anime) // 引数をRequestからPostRequestにする
     {
+        
+        $request->validate([
+	        'post.rate' => 'required|',
+	        'post.body' => 'nullable|string',
+        ]);
+        
+        //dd($request);
         $input = $request['post'];
         $input += ['user_id' => $request->user()->id];
         $make= Anime::where('id', $input["anime_id"]);
@@ -172,7 +182,6 @@ class PostController extends Controller
         $datas = $response->json($key = null, $default = null)["works"];
         $count = $response->json($key = null, $default = null)["total_count"];
         
-         //dd($datas);
         //アニメテーブルにデータを挿入
         $anime = New Anime();
         $anime->id = $datas[$count-1]["id"];
@@ -184,24 +193,43 @@ class PostController extends Controller
         if ( $datas[$count-1]["images"]["recommended_url"] == null){
                         $anime->image = "https://res.cloudinary.com/doyffsenj/image/upload/v1697170709/kyzyghyxq4mdkrso70zk.png";
         }
-        //dd($anime->image);
         $anime->era = $datas[$count-1]["released_on"];
         $anime->save();
         }
+        
         //postをテーブルに挿入
         $post = New Post();
         $post->anime_id = $input['anime_id'];
         $post->title = $input["title"];
-        $post->body = $input["body"];
+        if($input["body"] == null){
+        $post->body = ' ';
+        }
+        
         $post->rate = $input["rate"];
         $post->user_id = $input["user_id"];
         $post->save();
+        
+        //dd($post);
+        
         return redirect('/posts/anime_rate/list');
     }
     
      /*--アニメranking投稿--*/
     public function rank_post(Reason $reason, Rank $rank, Request $request) // 引数をRequestからPostRequestにする
     {
+        
+        //dd($request);
+        
+        $request->validate([
+	        'reason.title' => 'required|string|min:2',
+	        'reason.body' => 'required|string|min:2',
+	        'rank.title' => 'required|array',
+	        'rank.title.0' => 'required|string',
+	        'rank.title.1' => 'required|string',
+	        'rank.title.2' => 'required|string',
+        ]);
+        
+        
         $user_id = Auth::id();
         $input_rank = $request['rank'];
         $input_reason = $request['reason'];
@@ -249,7 +277,9 @@ class PostController extends Controller
         $datas = $response->json($key = null, $default = null)["works"];
         $count = $response->json($key = null, $default = null)["total_count"];
         return view('posts.anime_rate')->with(['datas' => $datas,'post' => $post,"count" => $count]);
+        
         }else{
+            
             $anime_rate = Post::where('anime_id',$id)->first();
             return view('posts.anime_rate_edit')->with(['post' => $anime_rate]);
         }
@@ -259,6 +289,7 @@ class PostController extends Controller
     public function edit_rate($id)
     {
         $anime_rate = Post::where('id',$id)->first();
+        //$anime = Anime::where('id',$id)->first();
         return view('posts.anime_rate_edit')->with(['post' => $anime_rate]);
     }
     
@@ -266,11 +297,15 @@ class PostController extends Controller
     public function update_rate(Request $request,Post $post, $id)
     {
         $user_id = Auth::id();
-        //$post = Post::find($id)->first();
-        //dd($post);
         $input_post = $request['post'];
-        $input_post += ['user_id' => $user_id];
-        $post->fill($input_post)->save();
+        
+        $post = Post::where('id',$id)->first();
+        
+        $post->body = $input_post['body'];
+        $post->rate = $input_post['rate'];
+        
+        $post->save();
+        //dd($post);
         return redirect('/posts/anime_rate/list');
     }
     
@@ -282,7 +317,7 @@ class PostController extends Controller
         return redirect('/posts/comment');
     }
     
-    /*--アニメranking投稿編集--*/
+    /*--アニメオススメアニメ投稿編集画面--*/
     public function edit_ranking($id,Reason $reason, Rank $rank)
     {
         $reason = Reason::where('user_id',$id)->first();
@@ -291,7 +326,7 @@ class PostController extends Controller
         return view('posts.edit')->with(['rank' => $rank, 'reason' => $reason, 'user' => $user]);
     }
     
-    
+    /*--アニメオススメアニメ投稿編集--*/
     public function update_ranking(Request $request,Reason $reason, Rank $rank)
     {
         $user_id = Auth::id();
@@ -299,11 +334,26 @@ class PostController extends Controller
         $input_rank = $request['rank'];
         $input_reason = $request['reason'];
         
+        
         $input_reason += ['user_id' => $user_id];
+        
+        if($input_reason['title'] == null || $input_reason['body'] == null){
+            $reason_st = Reason::where('user_id',$user_id)->first();
+            if($input_reason['title'] == null){
+                $input_reason['title'] = $reason_st->title;
+            }
+            if($input_reason['body'] == null){
+                $input_reason['body'] = $reason_st->body;
+            }
+            
+        }
+        
+        $rank_st = Rank::where('user_id',$user_id)->get()->toArray();
+        
         $reason_id = $input_reason['id'];
         DB::table('reasons')->where('user_id',$user_id)->delete();
         DB::table('ranks')->where('user_id',$user_id)->delete();
-        
+     
         $reason->fill($input_reason)->save();
         $reason_id = $user->reason->id;
         
@@ -365,6 +415,13 @@ class PostController extends Controller
         $user = Auth::user();
         $post = Post::where('user_id',$id)->get();
         return view('/users/rate_list')->with(['users' => $user,'posts' => $post]);
+    }
+    
+    public function  ranking_list($id,Post $post)
+    {
+        $user = Auth::user();
+        $post = Post::where('user_id',$id)->orderBy('rate','desc')->get();
+        return view('/users/rate_ranking')->with(['users' => $user,'post' => $post]);
     }
     
     public function  comment_list($id)
