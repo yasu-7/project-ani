@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-            <div class="w-80">
+            <div class="flex flex-row w-80">
         　      <span class="font-semibold text-xl">キーワード:</span>
         　      <input class="bg-white" type="search"name="period" placeholder="検索年代">
             </div>
@@ -33,8 +33,12 @@
                         <option value="winter">冬</option>
                 </select>
             </div>
-            {{ $errors->first('period') }}
         </div></br>
+        
+        <div class="text-center font-semibold py-4">
+            {{ $errors->first('period') }}
+        </div>
+        
         <div class="text-center">
             <button class="bg-black font-medium text-white py-2 px-4 rounded ">
                 <input class="" type="submit" value="Search">

@@ -1,7 +1,7 @@
 
   <div class="flex">
     <div class="w-full text-center text-3xl font-bold m-4">アニメ投稿一覧</div>
-    <div class="justify-end m-4"><a href="/register" class="no-underline hover:underline decoretion-sky-500 hover:text-sky-500">新規登録</a></div>
+    <div class="justify-end m-4 w-80 text-center"><a href="/register" class="no-underline hover:underline decoretion-sky-500 hover:text-sky-500">新規登録</a></div>
   </div>
    
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.3/dist/full.css" rel="stylesheet" type="text/css" />

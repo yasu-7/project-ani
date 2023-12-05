@@ -65,7 +65,7 @@
                 
               <!-- title -->
               <td>
-                  <div class="font-bold text-center px-8"><a href="/posts/{{ $rating->anime->id }}/anime_view">{{$rating->anime->name}}</a></div>
+                  <div class="font-bold text-center px-8 no-underline hover:underline decoretion-sky-500 hover:text-sky-500"><a href="/posts/{{ $rating->anime->id }}/anime_view">{{$rating->anime->name}}</a></div>
               </td>
               <td>
                   <span>
